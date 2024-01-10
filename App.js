@@ -7,6 +7,7 @@ import HomeScreen from './screens/HomeScreen';
 import { Provider } from 'react-redux';
 import * as SplashScreen from 'expo-splash-screen';
 import { store } from './redux/store';
+import PendingTaskScreen from './screens/PendingTaskScreen';
 
 SplashScreen.preventAutoHideAsync();
 
@@ -20,7 +21,7 @@ const App = () => {
     'poppins-medium': require('./assets/fonts/Poppins-Medium.ttf'),
     'poppins-semibold': require('./assets/fonts/Poppins-SemiBold.ttf'),
     'poppins-bold': require('./assets/fonts/Poppins-Bold.ttf'),
-      'poppins-extrabold': require('./assets/fonts/Poppins-ExtraBold.ttf'),
+    'poppins-extrabold': require('./assets/fonts/Poppins-ExtraBold.ttf'),
     'lobster-regular': require('./assets/fonts/Lobster-Regular.ttf')
   });
 
@@ -43,9 +44,10 @@ const App = () => {
   return (
     <Provider store={store}>
       <NavigationContainer>
-        <Stack.Navigator initialRouteName="Home">
+        <Stack.Navigator initialRouteName="Pending">
           <Stack.Screen name="Login" options={{ headerShown: false }} component={LoginScreen} />
           <Stack.Screen name="Home" options={{ headerShown: false }} component={HomeScreen} />
+          <Stack.Screen name="Pending" options={{ headerShown: false }} component={PendingTaskScreen} />
         </Stack.Navigator>
       </NavigationContainer>
     </Provider>

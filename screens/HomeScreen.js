@@ -18,10 +18,10 @@ const HomeScreen = () => {
   const sliceColor = ['#BF3131', '#15c75a']
 
   const data = [
-    { name: 'Akash', points: 120 },
+    { name: 'Kesavan', points: 120 },
     { name: 'Haricharan', points: 50 },
     { name: 'Nandhaana', points: 50 },
-    { name: 'Kesavan ', points: 40 },
+    { name: 'Akash', points: 40 },
     { name: 'Maysa', points: 35 },
   ];
 
@@ -53,10 +53,10 @@ const HomeScreen = () => {
         <UserIcon color="black" strokeWidth={2} size="28" />
       </View>
       <ScrollView>
-        <View className="bg-[#f8f8f9] flex-1 py-3 px-3 ">
+        <View className="bg-[#F5F7F8] flex-1 py-3 px-3 ">
           <Text
             style={{ fontFamily: 'poppins-bold' }}
-            className="text-2xl px-2 py-4 text-gray-700 font-extrabold"
+            className="text-2xl px-2 py-4 text-gray-700"
           >Welcome Back, Akash 👋🏻</Text>
 
           <Animated.View
@@ -197,7 +197,6 @@ const HomeScreen = () => {
 
         </View>
       </ScrollView>
-
     </SafeAreaView>
   )
 }

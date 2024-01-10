@@ -1,7 +1,6 @@
 import React, { useState } from 'react';
 import { View, Text, KeyboardAvoidingView, TouchableOpacity, TextInput, ActivityIndicator, TouchableWithoutFeedback, Keyboard } from 'react-native'
 import Animated, { FadeInUp, FadeInDown, } from 'react-native-reanimated';
-import { MaterialIcons } from '@expo/vector-icons';
 import { signInWithEmailAndPassword } from 'firebase/auth';
 import { auth } from "../firebase"
 import { storeUserData } from '../utils/storage';
