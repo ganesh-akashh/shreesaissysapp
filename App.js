@@ -44,7 +44,7 @@ const App = () => {
   return (
     <Provider store={store}>
       <NavigationContainer>
-        <Stack.Navigator initialRouteName="Pending">
+        <Stack.Navigator initialRouteName="Login">
           <Stack.Screen name="Login" options={{ headerShown: false }} component={LoginScreen} />
           <Stack.Screen name="Home" options={{ headerShown: false }} component={HomeScreen} />
           <Stack.Screen name="Pending" options={{ headerShown: false }} component={PendingTaskScreen} />
