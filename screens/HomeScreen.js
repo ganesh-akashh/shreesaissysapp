@@ -7,6 +7,7 @@ import { SafeAreaView } from 'react-native-safe-area-context'
 import Animated, { FadeInUp } from 'react-native-reanimated'
 import { Bars3CenterLeftIcon, UserIcon, Square3Stack3DIcon, TrophyIcon, ShieldCheckIcon, ExclamationTriangleIcon } from 'react-native-heroicons/outline'
 import PieChart from 'react-native-pie-chart'
+import Navbar from '../components/shared/Navbar'
 
 
 const HomeScreen = () => {
@@ -30,28 +31,10 @@ const HomeScreen = () => {
 
   return (
 
-    <SafeAreaView className="flex-1 bg-white flex space-y-3" edges={['top']}>
+    <SafeAreaView className="flex-1 bg-[#FFFFFF] flex space-y-3" edges={['top']}>
       <StatusBar style='dark' />
 
-      <View className="flex-row bg-white justify-between items-center px-5">
-        <Bars3CenterLeftIcon color="black" strokeWidth={2} size="28" />
-        <Animated.View
-          className="space-y-2 flex-row gap-1 items-center mr-3"
-          entering={FadeInUp.delay(200).duration(1000).springify()}
-        >
-          <Image
-            source={require('../assets/images/sun.jpg')}
-            style={{ width: 40, height: 40 }}
-          />
-          <Text
-            style={{ fontFamily: 'lobster-regular' }}
-            className="text-2xl   text-emerald-700"
-          >
-            Shree Sai Sys
-          </Text>
-        </Animated.View>
-        <UserIcon color="black" strokeWidth={2} size="28" />
-      </View>
+      <Navbar />
       <ScrollView>
         <View className="bg-[#F5F7F8] flex-1 py-3 px-3 ">
           <Text
@@ -60,7 +43,7 @@ const HomeScreen = () => {
           >Welcome Back, Akash 👋🏻</Text>
 
           <Animated.View
-            className="rounded-lg border  border-[#f8f8f9] shadow-sm bg-white ml-2 mr-2 mt-5 px-2 py-1 "
+            className="rounded-lg border  border-[#f8f8f9] shadow-sm bg-[#FFFFFF] ml-2 mr-2 mt-5 px-2 py-1 "
             entering={FadeInUp.delay(200).duration(1000).springify()}
           >
             <View className="flex flex-col  space-y-1.5 p-6">
@@ -80,7 +63,7 @@ const HomeScreen = () => {
           </Animated.View>
 
           <Animated.View
-            className="rounded-lg border  border-[#f8f8f9] shadow-sm bg-white ml-2 mr-2 mt-5 px-2 py-1 "
+            className="rounded-lg border  border-[#f8f8f9] shadow-sm bg-[#FFFFFF] ml-2 mr-2 mt-5 px-2 py-1 "
             entering={FadeInUp.delay(400).duration(1000).springify()}
           >
             <View className="flex flex-col  space-y-1.5 p-6">
@@ -100,7 +83,7 @@ const HomeScreen = () => {
           </Animated.View>
 
           <Animated.View
-            className="rounded-lg border  border-[#f8f8f9] shadow-sm bg-white ml-2 mr-2 mt-5 px-2 py-1 "
+            className="rounded-lg border  border-[#f8f8f9] shadow-sm bg-[#FFFFFF] ml-2 mr-2 mt-5 px-2 py-1 "
             entering={FadeInUp.delay(600).duration(1000).springify()}
           >
             <View className="flex flex-col  space-y-1.5 p-6">
@@ -120,7 +103,7 @@ const HomeScreen = () => {
           </Animated.View>
 
           <Animated.View
-            className="rounded-lg border  border-[#f8f8f9] shadow-sm bg-white ml-2 mr-2 mt-5 px-2 py-1 "
+            className="rounded-lg border  border-[#f8f8f9] shadow-sm bg-[#FFFFFF] ml-2 mr-2 mt-5 px-2 py-1 "
             entering={FadeInUp.delay(800).duration(1000).springify()}
 
           >
@@ -141,7 +124,7 @@ const HomeScreen = () => {
           </Animated.View>
 
           <Animated.View
-            className="rounded-lg border  border-[#f8f8f9] shadow-sm bg-white ml-2 mr-2 mt-5 px-2 py-1 "
+            className="rounded-lg border  border-[#f8f8f9] shadow-sm bg-[#FFFFFF] ml-2 mr-2 mt-5 px-2 py-1 "
             entering={FadeInUp.delay(1000).duration(1000).springify()}
           >
 
@@ -169,7 +152,7 @@ const HomeScreen = () => {
           </Animated.View>
 
           <Animated.View
-            className="rounded-lg border  border-[#f8f8f9] shadow-sm bg-white ml-2 mr-2 mt-5 px-2 py-1 "
+            className="rounded-lg border  border-[#f8f8f9] shadow-sm bg-[#FFFFFF] ml-2 mr-2 mt-5 px-2 py-1 "
             entering={FadeInUp.delay(1000).duration(1000).springify()}
           >
 
@@ -184,7 +167,7 @@ const HomeScreen = () => {
                   <View key={index} className="flex-row flex-wrap border-b p-2 border-[#e1e1ea]  justify-between">
                     <View className="flex-row gap-2 items-center">
                       <Text className="text-base" style={{ fontFamily: 'poppins-bold' }}>{index + 1}.</Text>
-                      <Text className="text-lg text-gray-700" style={{ fontFamily: 'poppins-medium' }}>{item.name}</Text>
+                      <Text className="text-base text-gray-700" style={{ fontFamily: 'poppins-medium' }}>{item.name}</Text>
                     </View>
                     <Text className="text-base" style={{ fontFamily: 'poppins-medium' }}>{item.points} points</Text>
                   </View>

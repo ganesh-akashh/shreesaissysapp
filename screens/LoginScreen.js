@@ -44,7 +44,7 @@ const LoginScreen = () => {
             await storeUserData(response.user, 'userData');
             console.log(response.user);
             if (response.user) {
-                navigation.navigate("Home");
+                navigation.navigate("Main");
                 const q = query(userRef, where("uid", "==", user.uid));
                 const querySnapshot = await getDocs(q);
                 const data = querySnapshot.docs.map((doc) => ({

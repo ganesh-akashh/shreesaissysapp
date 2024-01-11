@@ -1,20 +1,22 @@
 import React, { useCallback, useEffect, useState } from 'react';
 import { NavigationContainer } from '@react-navigation/native';
 import { createNativeStackNavigator } from '@react-navigation/native-stack';
+import { createDrawerNavigator } from '@react-navigation/drawer';
 import { useFonts } from 'expo-font';
+import * as SplashScreen from 'expo-splash-screen';
+import { Provider } from 'react-redux';
 import LoginScreen from './screens/LoginScreen';
 import HomeScreen from './screens/HomeScreen';
-import { Provider } from 'react-redux';
-import * as SplashScreen from 'expo-splash-screen';
-import { store } from './redux/store';
 import PendingTaskScreen from './screens/PendingTaskScreen';
+import { store } from './redux/store';
+import DrawerContent from "./components/shared/DrawerContent"
 
 SplashScreen.preventAutoHideAsync();
 
 const Stack = createNativeStackNavigator();
+const Drawer = createDrawerNavigator();
 
 const App = () => {
-
   const [fontsLoaded] = useFonts({
     'poppins-regular': require('./assets/fonts/Poppins-Regular.ttf'),
     'poppins-light': require('./assets/fonts/Poppins-Light.ttf'),
@@ -44,10 +46,20 @@ const App = () => {
   return (
     <Provider store={store}>
       <NavigationContainer>
-        <Stack.Navigator initialRouteName="Login">
+        <Stack.Navigator initialRouteName="Main">
           <Stack.Screen name="Login" options={{ headerShown: false }} component={LoginScreen} />
-          <Stack.Screen name="Home" options={{ headerShown: false }} component={HomeScreen} />
-          <Stack.Screen name="Pending" options={{ headerShown: false }} component={PendingTaskScreen} />
+          <Stack.Screen name="Main" options={{ headerShown: false }}>
+            {() => (
+              <Drawer.Navigator
+                initialRouteName="Home"
+                drawerContent={(props) => <DrawerContent {...props}
+                />}
+              >
+                <Drawer.Screen name="Home" options={{ headerShown: false }} component={HomeScreen} />
+                <Drawer.Screen name="Pending" options={{ headerShown: false }} component={PendingTaskScreen} />
+              </Drawer.Navigator>
+            )}
+          </Stack.Screen>
         </Stack.Navigator>
       </NavigationContainer>
     </Provider>
