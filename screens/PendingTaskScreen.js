@@ -42,7 +42,7 @@ const PendingTaskScreen = () => {
                         <ScrollView >
                             <Pressable>
                                 <PendingTaskCard />
-                                <PendingTaskCard />
+                                   <PendingTaskCard />
                             </Pressable>
                         </ScrollView>
                     }

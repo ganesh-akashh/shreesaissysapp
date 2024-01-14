@@ -3,7 +3,7 @@ import React, { useState } from 'react'
 import { StatusBar } from 'expo-status-bar'
 import { SafeAreaView } from 'react-native-safe-area-context'
 import Animated, { FadeInUp } from 'react-native-reanimated'
-import { Bars3CenterLeftIcon, UserIcon, MagnifyingGlassIcon } from 'react-native-heroicons/outline'
+import { MagnifyingGlassIcon } from 'react-native-heroicons/outline'
 import PendingTaskCard from '../components/cards/PendingTaskCard'
 import Empty from '../components/shared/Empty'
 import Navbar from '../components/shared/Navbar'
@@ -12,7 +12,7 @@ import Navbar from '../components/shared/Navbar'
 
 const CompletedTaskScreen = () => {
 
-    const [tasks, setTasks] = useState([1]);
+    const [tasks, setTasks] = useState([]);
 
     return (
         <TouchableWithoutFeedback>
@@ -24,7 +24,6 @@ const CompletedTaskScreen = () => {
                     <View className="py-2 px-3 ">
                         <View
                             className="rounded-lg border  border-[#f8f8f9] shadow-sm bg-[#FFFFFF] ml-2 mr-2 mt-1 "
-                            entering={FadeInUp.delay(400).duration(1000).springify()}
                         >
                             <View className="flex flex-col border-l-emerald-800 border-l-4  relative p-2.5 space-y-1">
                                 <MagnifyingGlassIcon style={{ position: "absolute", top: 16, left: 10 }} size={25} color="black" />
@@ -38,7 +37,7 @@ const CompletedTaskScreen = () => {
                             </View>
                         </View>
                     </View>
-                    {tasks.length == 0 ? <Empty /> :
+                    {tasks.length === 0 ? <Empty /> :
                         <ScrollView >
                             <Pressable>
                                 <PendingTaskCard />
