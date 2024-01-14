@@ -10,6 +10,7 @@ import HomeScreen from './screens/HomeScreen';
 import PendingTaskScreen from './screens/PendingTaskScreen';
 import { store } from './redux/store';
 import DrawerContent from "./components/shared/DrawerContent"
+import CompletedTaskScreen from './screens/CompletedTaskScreen';
 
 SplashScreen.preventAutoHideAsync();
 
@@ -57,6 +58,7 @@ const App = () => {
               >
                 <Drawer.Screen name="Home" options={{ headerShown: false }} component={HomeScreen} />
                 <Drawer.Screen name="Pending" options={{ headerShown: false }} component={PendingTaskScreen} />
+                <Drawer.Screen name="Completed" options={{headerShown:false}}  component={CompletedTaskScreen}/>
               </Drawer.Navigator>
             )}
           </Stack.Screen>

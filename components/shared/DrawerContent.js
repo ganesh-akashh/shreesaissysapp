@@ -1,4 +1,4 @@
-// DrawerContent.js
+
 import React from 'react';
 import { View, Text, TouchableOpacity, SafeAreaView, Image, Dimensions } from 'react-native';
 import { HomeIcon, ShieldCheckIcon, ExclamationTriangleIcon } from 'react-native-heroicons/outline'
@@ -17,7 +17,7 @@ const DrawerContent = ({ navigation }) => {
       <View className="" >
         <Image
           source={require('../../assets/images/logo.jpeg')}
-          style={{ width: 180, height: 140 }}
+          style = {{ width: 180, height: 140 }}
         />
         <View className="h-[0.7] mt-5  bg-emerald-800" />
       </View>
@@ -30,7 +30,7 @@ const DrawerContent = ({ navigation }) => {
           <ExclamationTriangleIcon color="green" size={20} />
           <Text className="text-lg text-emerald-700" style={{ fontFamily: 'poppins-medium' }}>Pending Tasks</Text>
         </TouchableOpacity>
-        <TouchableOpacity className="flex gap-2 items-center flex-row">
+        <TouchableOpacity className="flex gap-2 items-center flex-row" onPress={() => handleDrawerItemPress('Completed')}>
           <ShieldCheckIcon color="green" size={20} />
           <Text className="text-lg text-emerald-700" style={{ fontFamily: 'poppins-medium' }}>Completed Tasks</Text>
         </TouchableOpacity>

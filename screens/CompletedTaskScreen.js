@@ -10,7 +10,7 @@ import Navbar from '../components/shared/Navbar'
 
 
 
-const PendingTaskScreen = () => {
+const CompletedTaskScreen = () => {
 
     const [tasks, setTasks] = useState([1]);
 
@@ -52,4 +52,4 @@ const PendingTaskScreen = () => {
     )
 }
 
-export default PendingTaskScreen
+export default CompletedTaskScreen
