@@ -1,9 +1,9 @@
 import { View, Text, Image, TouchableOpacity, Dimensions } from 'react-native'
 import React from 'react'
-import { ArrowLeftIcon, ArrowLeftStartOnRectangleIcon, ArrowRightStartOnRectangleIcon, ArrowUturnLeftIcon, Bars3CenterLeftIcon, ChevronLeftIcon, UserIcon } from 'react-native-heroicons/outline'
+import { ArrowRightStartOnRectangleIcon, ArrowUturnLeftIcon, Bars3CenterLeftIcon, ChevronLeftIcon, UserIcon } from 'react-native-heroicons/outline'
 import Animated, { FadeInUp } from 'react-native-reanimated'
 import { useNavigation } from '@react-navigation/native';
-
+import AsyncStorage from '@react-native-async-storage/async-storage';
 
 const Navbar = ({ type }) => {
   const screenWidth = Dimensions.get('window').width;
@@ -12,7 +12,12 @@ const Navbar = ({ type }) => {
   const navigation = useNavigation();
 
   const handleLogout = async () => {
-
+    try {
+      await AsyncStorage.clear();
+      navigation.navigate('Login');
+    } catch (error) {
+      console.log(error);
+    }
   }
 
   return (
@@ -50,6 +55,7 @@ const Navbar = ({ type }) => {
       </Animated.View>
       <TouchableOpacity
         onPress={handleLogout}
+        className="p-2"
       >
 
         <ArrowRightStartOnRectangleIcon color="black" strokeWidth={2} size="27" />

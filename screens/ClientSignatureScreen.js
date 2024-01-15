@@ -3,6 +3,7 @@ import { View, Text, SafeAreaView, StatusBar } from 'react-native'
 import Navbar from '../components/shared/Navbar'
 import SignatureScreen from 'react-native-signature-canvas';
 import { useNavigation } from '@react-navigation/native';
+import Header from '../components/shared/Header';
 
 const ClientSignatureScreen = () => {
 
@@ -13,7 +14,7 @@ const ClientSignatureScreen = () => {
 
 
     const handleSignature = (signature) => {
-        console.log(signature);
+       
         setSignature(signature);
         navigation.goBack();
     };
@@ -23,18 +24,7 @@ const ClientSignatureScreen = () => {
             <StatusBar style='dark' />
             <Navbar type="nested" />
             <View className=" bg-white flex-1   space-y-7  py-3 px-3">
-                <View className="">
-                    <Text
-                        style={{ fontFamily: 'poppins-bold' }}
-                        className="text-2xl px-2 pt-4 text-gray-700"
-                    >Client's Signature
-                    </Text>
-                    <Text
-                        className="text-md px-2 pt-2"
-                        style={{ fontFamily: 'poppins-regular' }}>
-                        Put the signature here 👇🏻
-                    </Text>
-                </View>
+            <Header title="Client's Signature" subheading=" Put the signature here 👇🏻" />
                 <View className="  h-[600px]">
                     <SignatureScreen
                         ref={ref}

@@ -2,6 +2,7 @@ import React, { useState } from 'react'
 import { View, Text, SafeAreaView, StatusBar, TextInput, TouchableOpacity, TouchableWithoutFeedback, Keyboard, ActivityIndicator } from 'react-native'
 import Navbar from '../components/shared/Navbar'
 import { useNavigation } from '@react-navigation/native';
+import Header from '../components/shared/Header';
 
 const UpdateTaskScreen = () => {
 
@@ -9,7 +10,7 @@ const UpdateTaskScreen = () => {
     const [loading, setLoading] = useState(false);
 
     const handleSubmit = async () => {
-        
+
     }
 
     return (
@@ -20,18 +21,8 @@ const UpdateTaskScreen = () => {
                 <StatusBar style='dark' />
                 <Navbar type="nested" />
                 <View className=" bg-white flex-1   space-y-7  py-3 px-3">
-                    <View className="">
-                        <Text
-                            style={{ fontFamily: 'poppins-bold' }}
-                            className="text-2xl px-2 pt-4 text-gray-700"
-                        >Update Reason
-                        </Text>
-                        <Text
-                            className="text-md px-2 pt-2"
-                            style={{ fontFamily: 'poppins-regular' }}>
-                            Add the reason for pending 👇🏻
-                        </Text>
-                    </View>
+                    <Header title="Update Reason" subheading="Add the reason for pending 👇🏻" />
+                   
                     <View className="flex-[0.98]">
                         <Text
                             style={{ fontFamily: 'poppins-semibold' }}

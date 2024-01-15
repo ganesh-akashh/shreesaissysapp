@@ -1,18 +1,18 @@
 import { View, Text, Image, ScrollView } from 'react-native'
 import React from 'react'
-import { authDetails } from '../redux/reducers/auth'
-import { useSelector } from 'react-redux'
 import { StatusBar } from 'expo-status-bar'
 import { SafeAreaView } from 'react-native-safe-area-context'
 import Animated, { FadeInUp } from 'react-native-reanimated'
 import { Bars3CenterLeftIcon, UserIcon, Square3Stack3DIcon, TrophyIcon, ShieldCheckIcon, ExclamationTriangleIcon } from 'react-native-heroicons/outline'
 import PieChart from 'react-native-pie-chart'
 import Navbar from '../components/shared/Navbar'
-
+import { getUserData } from '../utils/storage'
 
 const HomeScreen = () => {
 
-  const user = useSelector(authDetails);
+  
+
+  
 
   const widthAndHeight = 280
   const series = [30, 70]

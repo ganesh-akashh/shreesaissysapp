@@ -1,4 +1,4 @@
-import { View, Text, Image, TextInput, TouchableWithoutFeedback, ScrollView, FlatList, TouchableOpacity, Pressable } from 'react-native'
+import { View, Text, Image, TextInput, TouchableWithoutFeedback, ScrollView, FlatList, TouchableOpacity,Keyboard, Pressable } from 'react-native'
 import React, { useState } from 'react'
 import { StatusBar } from 'expo-status-bar'
 import { SafeAreaView } from 'react-native-safe-area-context'
@@ -15,7 +15,7 @@ const CompletedTaskScreen = () => {
     const [tasks, setTasks] = useState([]);
 
     return (
-        <TouchableWithoutFeedback>
+        <TouchableWithoutFeedback onPress={()=> Keyboard.dismiss()}>
             <SafeAreaView className="bg-white flex-1 space-y-3" edges={['top']}>
                 <StatusBar style='dark' />
 

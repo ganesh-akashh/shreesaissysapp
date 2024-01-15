@@ -4,6 +4,7 @@ import DateTimePicker from '@react-native-community/datetimepicker';
 import Navbar from '../components/shared/Navbar'
 import { PencilIcon } from 'react-native-heroicons/outline'
 import { useNavigation } from '@react-navigation/native';
+import Header from '../components/shared/Header';
 
 const FormScreen = () => {
 
@@ -34,18 +35,7 @@ const FormScreen = () => {
                 <StatusBar style='dark' />
                 <Navbar type="nested" />
                 <View className=" bg-white flex flex-row items-center justify-between  py-3 px-3">
-                    <View>
-                        <Text
-                            style={{ fontFamily: 'poppins-bold' }}
-                            className="text-2xl px-2 pt-4 text-gray-700"
-                        >Complete Task
-                        </Text>
-                        <Text
-                            className="text-md px-2 pt-2"
-                            style={{ fontFamily: 'poppins-regular' }}>
-                            Add the corresponding task details
-                        </Text>
-                    </View>
+                <Header title="Complete Task" subheading="Add the corresponding task details" />
                     <View>
                         <TouchableOpacity className="p-2 border rounded-lg border-[#f8f8f9] bg-emerald-700 " onPress={() => navigation.push("ClientSignatureScreen")}>
                             <PencilIcon color="white" />

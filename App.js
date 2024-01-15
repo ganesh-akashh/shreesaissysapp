@@ -14,6 +14,7 @@ import CompletedTaskScreen from './screens/CompletedTaskScreen';
 import FormScreen from './screens/FormScreen';
 import ClientSignatureScreen from './screens/ClientSignatureScreen';
 import UpdateTaskScreen from './screens/UpdateTaskScreen';
+import { getUserData } from './utils/storage';
 
 SplashScreen.preventAutoHideAsync();
 
@@ -21,6 +22,8 @@ const Stack = createNativeStackNavigator();
 const Drawer = createDrawerNavigator();
 
 const App = () => {
+
+
   const [fontsLoaded] = useFonts({
     'poppins-regular': require('./assets/fonts/Poppins-Regular.ttf'),
     'poppins-light': require('./assets/fonts/Poppins-Light.ttf'),
@@ -32,16 +35,27 @@ const App = () => {
   });
 
   const [appIsReady, setAppIsReady] = useState(false);
+  const [userData, setUserData] = useState(null);
+
+  console.log(userData);
+
 
   const loadAssetsAsync = async () => {
     await SplashScreen.hideAsync();
   };
 
   useEffect(() => {
+    const fetchUserData = async () => {
+      const storedUserData = await getUserData('userData');
+      setUserData(storedUserData);
+    };
     if (fontsLoaded) {
       loadAssetsAsync().then(() => setAppIsReady(true));
+      fetchUserData();
     }
   }, [fontsLoaded]);
+
+
 
   if (!appIsReady) {
     return null;
@@ -49,34 +63,38 @@ const App = () => {
 
   return (
     <Provider store={store}>
-      <NavigationContainer>
-        <Stack.Navigator initialRouteName="Main">
-          <Stack.Screen name="Login" options={{ headerShown: false }} component={LoginScreen} />
-          <Stack.Screen name="Main" options={{ headerShown: false }}>
-            {() => (
-              <Drawer.Navigator
-                initialRouteName="Home"
-                 screenOptions={{ swipeEnabled: false }}
-                drawerContent={(props) => <DrawerContent {...props} />}
-              >
-                <Drawer.Screen name="Home" options={{ headerShown: false }} component={HomeScreen} />
-                <Drawer.Screen name="Pending" options={{ headerShown: false }}>
-                  {() => (
-                    <Stack.Navigator>
-                      <Stack.Screen name='PendingTasks' options={{ headerShown: false }} component={PendingTaskScreen} />
-                      <Stack.Screen name='UpadateTaskScreen' options={{ headerShown: false }} component={UpdateTaskScreen} />
-                      <Stack.Screen name='FormScreen' options={{ headerShown: false }} component={FormScreen} />
-                      <Stack.Screen name='ClientSignatureScreen' options={{ headerShown: false }} component={ClientSignatureScreen} />
-                    </Stack.Navigator>
-                  )}
-                </Drawer.Screen>
-                <Drawer.Screen name="Completed" options={{ headerShown: false }} component={CompletedTaskScreen} />
-              </Drawer.Navigator>
-            )}
-          </Stack.Screen>
-        </Stack.Navigator>
-      </NavigationContainer>
-    </Provider>
+  <NavigationContainer>
+    <Stack.Navigator initialRouteName={userData ? "Main" : "Login"}>
+      {userData ? (
+        <Stack.Screen name="Main" options={{ headerShown: false }}>
+          {() => (
+            <Drawer.Navigator
+              initialRouteName="Home"
+              screenOptions={{ swipeEnabled: false }}
+              drawerContent={(props) => <DrawerContent {...props} />}
+            >
+              <Drawer.Screen name="Home" options={{ headerShown: false }} component={HomeScreen} />
+              <Drawer.Screen name="Pending" options={{ headerShown: false }}>
+                {() => (
+                  <Stack.Navigator>
+                    <Stack.Screen name="PendingTasks" options={{ headerShown: false }} component={PendingTaskScreen} />
+                    <Stack.Screen name="UpdateTaskScreen" options={{ headerShown: false }} component={UpdateTaskScreen} />
+                    <Stack.Screen name="FormScreen" options={{ headerShown: false }} component={FormScreen} />
+                    <Stack.Screen name="ClientSignatureScreen" options={{ headerShown: false }} component={ClientSignatureScreen} />
+                  </Stack.Navigator>
+                )}
+              </Drawer.Screen>
+              <Drawer.Screen name="Completed" options={{ headerShown: false }} component={CompletedTaskScreen} />
+            </Drawer.Navigator>
+          )}
+        </Stack.Screen>
+      ) : (
+        <Stack.Screen name="Login" options={{ headerShown: false }} component={LoginScreen} />
+      )}
+    </Stack.Navigator>
+  </NavigationContainer>
+</Provider>
+
   );
 };
 

@@ -5,9 +5,7 @@ import { signInWithEmailAndPassword } from 'firebase/auth';
 import { auth } from "../firebase"
 import { storeUserData } from '../utils/storage';
 import { collection, getDocs, query, where } from "firebase/firestore";
-import { loadAuth } from '../redux/reducers/auth';
 import { useNavigation } from '@react-navigation/native';
-import { useDispatch } from 'react-redux';
 import { FIRESTORE_DB } from '../firebase';
 
 const LoginScreen = () => {
@@ -19,9 +17,8 @@ const LoginScreen = () => {
         password: '',
     });
 
-    const dispatch = useDispatch();
     const userRef = collection(db, "users");
-  
+
 
     const navigation = useNavigation();
     const [loading, setLoading] = useState(false);
@@ -41,30 +38,20 @@ const LoginScreen = () => {
         setLoading(true);
         try {
             const response = await signInWithEmailAndPassword(auth, formValues.email, formValues.password);
-            await storeUserData(response.user, 'userData');
-            console.log(response.user);
             if (response.user) {
-                navigation.navigate("Main");
-                const q = query(userRef, where("uid", "==", user.uid));
+                const q = query(userRef, where("uid", "==", response.user.uid));
                 const querySnapshot = await getDocs(q);
                 const data = querySnapshot.docs.map((doc) => ({
                     ...doc.data(),
                     id: doc.id,
                 }));
-                if (data.length > 0) {
-                    dispatch(
-                        loadAuth({
-                            token: user.refreshToken,
-                            role: data[0].role,
-                            uid: data[0].uid,
-                            docId: data[0].id,
-                        })
-                    );
+                if (data.length > 0 && data[0].role === "employee") {
+                    await storeUserData(response.user, 'userData');
+                    navigation.navigate("Main");
                 } else {
-                    setError(true);
+                    setError(true);r
                 }
             }
-
         } catch (error) {
             console.log(error.message);
             setError(true);
