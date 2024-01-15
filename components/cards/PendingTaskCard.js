@@ -1,18 +1,24 @@
 import { View, Text, Image, TouchableOpacity } from 'react-native'
 import { useNavigation } from '@react-navigation/native'
+import { PencilIcon } from 'react-native-heroicons/outline'
+import { useState } from 'react';
 
 const PendingTaskCard = () => {
 
     const navigation = useNavigation();
 
+
+
+
     return (
         <View
             className="rounded-lg border mb-3 border-[#d9d9e1] shadow-sm bg-white ml-2  mr-2 mt-5 mx-4  "
-
         >
             <View className="flex flex-col justify-center items-center ">
-                <View className="flex flex-col h-11 justify-center relative bg-emerald-700 w-full    items-center">
-
+                <View className="flex flex-col h-11 justify-center relative bg-emerald-700 w-full     items-end">
+                    <TouchableOpacity className="px-3  rounded-lg  bg-emerald-700 " onPress={() => navigation.push("UpadateTaskScreen")}>
+                        <PencilIcon color="white" size={20} />
+                    </TouchableOpacity>
                 </View>
                 <View className=" mr-2   p-1.5 border-white bg-white  rounded-full -mt-10">
                     <Image

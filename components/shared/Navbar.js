@@ -1,23 +1,38 @@
-import { View, Text, Image, TouchableOpacity,Dimensions } from 'react-native'
+import { View, Text, Image, TouchableOpacity, Dimensions } from 'react-native'
 import React from 'react'
-import { Bars3CenterLeftIcon, UserIcon } from 'react-native-heroicons/outline'
+import { ArrowLeftIcon, ArrowLeftStartOnRectangleIcon, ArrowRightStartOnRectangleIcon, ArrowUturnLeftIcon, Bars3CenterLeftIcon, ChevronLeftIcon, UserIcon } from 'react-native-heroicons/outline'
 import Animated, { FadeInUp } from 'react-native-reanimated'
 import { useNavigation } from '@react-navigation/native';
 
 
-const Navbar = () => {
-
+const Navbar = ({ type }) => {
   const screenWidth = Dimensions.get('window').width;
   const marginValue = screenWidth * 0.04;
 
   const navigation = useNavigation();
+
+  const handleLogout = async () => {
+
+  }
+
   return (
     <View className="flex-row bg-white justify-between items-center px-5" style={{ marginTop: marginValue }}>
-      <TouchableOpacity
-        onPress={() => navigation.openDrawer()}
-      >
-        <Bars3CenterLeftIcon color="black" strokeWidth={2} size="28" />
-      </TouchableOpacity>
+      {type === "main" ?
+
+        <TouchableOpacity
+          onPress={() => navigation.openDrawer()}
+        >
+
+          <Bars3CenterLeftIcon color="black" strokeWidth={2} size="28" />
+        </TouchableOpacity> :
+        <TouchableOpacity
+          onPress={() => navigation.goBack()}
+        >
+
+          <ChevronLeftIcon color="black" strokeWidth={2} size="24" />
+        </TouchableOpacity>
+
+      }
       <Animated.View
         className="space-y-2 flex-row gap-1 items-center mr-3"
         entering={FadeInUp.delay(200).duration(1000).springify()}
@@ -33,7 +48,12 @@ const Navbar = () => {
           Shree Sai Sys
         </Text>
       </Animated.View>
-      <UserIcon color="black" strokeWidth={2} size="28" />
+      <TouchableOpacity
+        onPress={handleLogout}
+      >
+
+        <ArrowRightStartOnRectangleIcon color="black" strokeWidth={2} size="27" />
+      </TouchableOpacity>
     </View>
   )
 }

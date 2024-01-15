@@ -12,6 +12,8 @@ import { store } from './redux/store';
 import DrawerContent from "./components/shared/DrawerContent"
 import CompletedTaskScreen from './screens/CompletedTaskScreen';
 import FormScreen from './screens/FormScreen';
+import ClientSignatureScreen from './screens/ClientSignatureScreen';
+import UpdateTaskScreen from './screens/UpdateTaskScreen';
 
 SplashScreen.preventAutoHideAsync();
 
@@ -54,14 +56,17 @@ const App = () => {
             {() => (
               <Drawer.Navigator
                 initialRouteName="Home"
+                 screenOptions={{ swipeEnabled: false }}
                 drawerContent={(props) => <DrawerContent {...props} />}
               >
                 <Drawer.Screen name="Home" options={{ headerShown: false }} component={HomeScreen} />
                 <Drawer.Screen name="Pending" options={{ headerShown: false }}>
                   {() => (
                     <Stack.Navigator>
-                      <Stack.Screen name='PendingTasks' options={{headerShown:false}} component={PendingTaskScreen} />
+                      <Stack.Screen name='PendingTasks' options={{ headerShown: false }} component={PendingTaskScreen} />
+                      <Stack.Screen name='UpadateTaskScreen' options={{ headerShown: false }} component={UpdateTaskScreen} />
                       <Stack.Screen name='FormScreen' options={{ headerShown: false }} component={FormScreen} />
+                      <Stack.Screen name='ClientSignatureScreen' options={{ headerShown: false }} component={ClientSignatureScreen} />
                     </Stack.Navigator>
                   )}
                 </Drawer.Screen>

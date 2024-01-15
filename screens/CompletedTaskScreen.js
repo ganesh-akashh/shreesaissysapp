@@ -19,7 +19,7 @@ const CompletedTaskScreen = () => {
             <SafeAreaView className="bg-white flex-1 space-y-3" edges={['top']}>
                 <StatusBar style='dark' />
 
-                <Navbar />
+                <Navbar type="main" />
                 <View className="flex-1  bg-[#f7f9fc] " >
                     <View className="py-2 px-3 ">
                         <View

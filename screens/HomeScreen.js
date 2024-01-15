@@ -34,7 +34,7 @@ const HomeScreen = () => {
     <SafeAreaView className="flex-1 bg-[#FFFFFF] flex space-y-3" edges={['top']}>
       <StatusBar style='dark' />
 
-      <Navbar />
+      <Navbar type="main" />
       <ScrollView>
         <View className="bg-[#F5F7F8] flex-1 py-3 px-3 ">
           <Text
