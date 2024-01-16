@@ -3,7 +3,6 @@ import { View, Text, KeyboardAvoidingView, TouchableOpacity, TextInput, Activity
 import Animated, { FadeInUp, FadeInDown, } from 'react-native-reanimated';
 import { signInWithEmailAndPassword } from 'firebase/auth';
 import { auth } from "../firebase"
-import { useNavigation } from '@react-navigation/native';
 import { userInfoQuery } from '../utils/query';
 
 const LoginScreen = () => {

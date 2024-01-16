@@ -1,4 +1,4 @@
-import { query, where, collection, getDocs } from "firebase/firestore";
+import { query, where, collection, getDocs, doc, onSnapshot } from "firebase/firestore";
 import { FIRESTORE_DB } from "../../firebase";
 
 
@@ -23,3 +23,22 @@ export const userInfoQuery = async (uid) => {
         console.log(error);
     }
 };
+
+
+export const empInfoQuery = (id, callback) => {
+    try {
+        const userDocRef = doc(db, `/users/${id}`);
+        const unsubscribe = onSnapshot(userDocRef, (docSnapShot) => {
+            const data = docSnapShot.exists() ? docSnapShot.data() : null;
+            callback(data);
+        })
+        return unsubscribe;
+    } catch (error) {
+        console.log(error);
+    }
+}
+
+
+
+
+

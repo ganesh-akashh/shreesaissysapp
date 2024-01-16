@@ -1,8 +1,8 @@
-import React, {  useEffect, useState ,lazy,Suspense } from 'react';
+import React, { useEffect, useState, lazy, Suspense } from 'react';
 import { NavigationContainer } from '@react-navigation/native';
 import { createNativeStackNavigator } from '@react-navigation/native-stack';
 import { createDrawerNavigator } from '@react-navigation/drawer';
-import {  useFonts } from 'expo-font';
+import { useFonts } from 'expo-font';
 import * as SplashScreen from 'expo-splash-screen';
 import { Provider } from 'react-redux';
 import HomeScreen from './screens/HomeScreen';
@@ -18,7 +18,6 @@ import { auth } from "./firebase";
 import { onAuthStateChanged } from 'firebase/auth';
 import { userInfoQuery } from './utils/query';
 import LoadingScreen from './screens/LoadingScreen';
-
 
 
 SplashScreen.preventAutoHideAsync();

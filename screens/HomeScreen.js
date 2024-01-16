@@ -1,18 +1,25 @@
-import { View, Text, Image, ScrollView } from 'react-native'
-import React from 'react'
-import { StatusBar } from 'expo-status-bar'
-import { SafeAreaView } from 'react-native-safe-area-context'
-import Animated, { FadeInUp } from 'react-native-reanimated'
-import { Bars3CenterLeftIcon, UserIcon, Square3Stack3DIcon, TrophyIcon, ShieldCheckIcon, ExclamationTriangleIcon } from 'react-native-heroicons/outline'
-import PieChart from 'react-native-pie-chart'
-import Navbar from '../components/shared/Navbar'
-import { getUserData } from '../utils/storage'
+import React from 'react';
+import { View, Text, ScrollView } from 'react-native';
+import { StatusBar } from 'expo-status-bar';
+import { SafeAreaView } from 'react-native-safe-area-context';
+import Animated, { FadeInUp } from 'react-native-reanimated';
+import {
+  Bars3CenterLeftIcon,
+  UserIcon,
+  Square3Stack3DIcon,
+  TrophyIcon,
+  ShieldCheckIcon,
+  ExclamationTriangleIcon,
+} from 'react-native-heroicons/outline';
+import PieChart from 'react-native-pie-chart';
+import Navbar from '../components/shared/Navbar';
+import { getUserData } from '../utils/storage';
+
 
 const HomeScreen = () => {
 
-  
 
-  
+
 
   const widthAndHeight = 280
   const series = [30, 70]
@@ -25,6 +32,39 @@ const HomeScreen = () => {
     { name: 'Akash', points: 40 },
     { name: 'Maysa', points: 35 },
   ];
+
+  const empdata = [
+    {
+      title: 'Total Tasks',
+      value: 10,
+      icon: <Square3Stack3DIcon size={55} color="blue" />,
+      color: '#f8f8f9',
+      delay: 200,
+    },
+    {
+      title: 'Completed Tasks',
+      value: 10,
+      icon: <ShieldCheckIcon size={55} color="green" />,
+      color: '#f8f8f9',
+      delay: 400,
+    },
+    {
+      title: 'Pending Tasks',
+      value: 10,
+      icon: <ExclamationTriangleIcon size={55} color="brown" />,
+      color: '#f8f8f9',
+      delay: 600,
+    },
+    {
+      title: 'Total Points',
+      value: 100,
+      icon: <TrophyIcon size={55} color="orange" />,
+      color: '#f8f8f9',
+      delay: 800,
+    },
+  ];
+
+
 
 
 
@@ -42,86 +82,35 @@ const HomeScreen = () => {
             className="text-2xl px-2 py-4 text-gray-700"
           >Welcome Back, Akash 👋🏻</Text>
 
-          <Animated.View
-            className="rounded-lg border  border-[#f8f8f9] shadow-sm bg-[#FFFFFF] ml-2 mr-2 mt-5 px-2 py-1 "
-            entering={FadeInUp.delay(200).duration(1000).springify()}
-          >
-            <View className="flex flex-col  space-y-1.5 p-6">
-              <Text className="text-lg  text-gray-700 leading-none tracking-tight" style={{ fontFamily: 'poppins-medium' }}>
-                Total Tasks
-              </Text>
-              <View className="flex flex-row justify-between items-center">
-                <Text className="text-xl ml-1  leading-none tracking-tight" style={{ fontFamily: 'poppins-semibold' }}>
-                  10
-                </Text>
-                <Square3Stack3DIcon size={55} color="blue" />
-              </View>
-              <Text className="text-base   text-gray-700 leading-none tracking-tight" style={{ fontFamily: 'poppins-regular' }}>
-                Tasks
-              </Text>
-            </View>
-          </Animated.View>
+          <>
+            {empdata.map((item, index) => (
+              <Animated.View
+                key={index}
+                className={`rounded-lg border border-[#f8f8f9]  border-${item.color} shadow-sm bg-[#FFFFFF] ml-2 mr-2 mt-5 px-2 py-1 `}
+                entering={FadeInUp.delay(item.delay).duration(1000).springify()}
+              >
+                <View className="flex flex-col space-y-1.5 p-6">
+                  <Text className="text-lg text-gray-700 leading-none tracking-tight" style={{ fontFamily: 'poppins-medium' }}>
+                    {item.title}
+                  </Text>
+                  <View className="flex flex-row justify-between items-center">
+                    <Text className="text-xl ml-1 leading-none tracking-tight" style={{ fontFamily: 'poppins-semibold' }}>
+                      {item.value}
+                    </Text>
+                    {item.icon}
+                  </View>
+                  <Text className="text-base text-gray-700 leading-none tracking-tight" style={{ fontFamily: 'poppins-regular' }}>
+                    {item.title === 'Total Points' ? 'Pending' : item.title}
+                  </Text>
+                </View>
+              </Animated.View>
+            ))}
+          </>
 
-          <Animated.View
-            className="rounded-lg border  border-[#f8f8f9] shadow-sm bg-[#FFFFFF] ml-2 mr-2 mt-5 px-2 py-1 "
-            entering={FadeInUp.delay(400).duration(1000).springify()}
-          >
-            <View className="flex flex-col  space-y-1.5 p-6">
-              <Text className="text-lg  text-gray-700 leading-none tracking-tight" style={{ fontFamily: 'poppins-medium' }}>
-                Completed Tasks
-              </Text>
-              <View className="flex flex-row justify-between items-center">
-                <Text className="text-xl ml-1  leading-none tracking-tight" style={{ fontFamily: 'poppins-semibold' }}>
-                  10
-                </Text>
-                <ShieldCheckIcon size={55} color="green" />
-              </View>
-              <Text className="text-base   text-gray-700 leading-none tracking-tight" style={{ fontFamily: 'poppins-regular' }}>
-                Completed
-              </Text>
-            </View>
-          </Animated.View>
 
-          <Animated.View
-            className="rounded-lg border  border-[#f8f8f9] shadow-sm bg-[#FFFFFF] ml-2 mr-2 mt-5 px-2 py-1 "
-            entering={FadeInUp.delay(600).duration(1000).springify()}
-          >
-            <View className="flex flex-col  space-y-1.5 p-6">
-              <Text className="text-lg  text-gray-700 leading-none tracking-tight" style={{ fontFamily: 'poppins-medium' }}>
-                Pending Tasks
-              </Text>
-              <View className="flex flex-row justify-between items-center">
-                <Text className="text-xl ml-1  leading-none tracking-tight" style={{ fontFamily: 'poppins-semibold' }}>
-                  10
-                </Text>
-                <ExclamationTriangleIcon size={55} color="brown" />
-              </View>
-              <Text className="text-base   text-gray-700 leading-none tracking-tight" style={{ fontFamily: 'poppins-regular' }}>
-                Pending
-              </Text>
-            </View>
-          </Animated.View>
 
-          <Animated.View
-            className="rounded-lg border  border-[#f8f8f9] shadow-sm bg-[#FFFFFF] ml-2 mr-2 mt-5 px-2 py-1 "
-            entering={FadeInUp.delay(800).duration(1000).springify()}
 
-          >
-            <View className="flex flex-col  space-y-1.5 p-6">
-              <Text className="text-lg  text-gray-700 leading-none tracking-tight" style={{ fontFamily: 'poppins-medium' }}>
-                Total Points
-              </Text>
-              <View className="flex flex-row justify-between items-center">
-                <Text className="text-xl ml-1  leading-none tracking-tight" style={{ fontFamily: 'poppins-semibold' }}>
-                  100
-                </Text>
-                <TrophyIcon size={55} color="orange" />
-              </View>
-              <Text className="text-base   text-gray-700 leading-none tracking-tight" style={{ fontFamily: 'poppins-regular' }}>
-                Pending
-              </Text>
-            </View>
-          </Animated.View>
+
 
           <Animated.View
             className="rounded-lg border  border-[#f8f8f9] shadow-sm bg-[#FFFFFF] ml-2 mr-2 mt-5 px-2 py-1 "
