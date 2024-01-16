@@ -16,28 +16,32 @@ const Navbar = ({ type }) => {
   const handleLogout = async () => {
     try {
       await signOut(auth)
+      await AsyncStorage.clear();
     } catch (error) {
       console.log(error);
     }
   }
 
   return (
-    <View className="flex-row bg-white justify-between items-center px-5" style={{ marginTop: marginValue }}>
-      {type === "main" ?
-        <TouchableOpacity
-          onPress={() => navigation.openDrawer()}
-        >
+    <View className="flex-row   pb-2 bg-white justify-between items-center px-5" style={{ marginTop: marginValue }}>
 
-          <Bars3CenterLeftIcon color="black" strokeWidth={2} size="28" />
-        </TouchableOpacity> :
-        <TouchableOpacity
-          onPress={() => navigation.goBack()}
-        >
+      <Animated.View
+        entering={FadeInUp.delay(200).duration(1000).springify()}
+      >
+        {type === "main" ?
+          <TouchableOpacity
+            onPress={() => navigation.openDrawer()}
+          >
+            <Bars3CenterLeftIcon color="black" strokeWidth={2} size="28" />
+          </TouchableOpacity> :
+          <TouchableOpacity
+            onPress={() => navigation.goBack()}
+          >
 
-          <ChevronLeftIcon color="black" strokeWidth={2} size="24" />
-        </TouchableOpacity>
-
-      }
+            <ChevronLeftIcon color="black" strokeWidth={2} size="24" />
+          </TouchableOpacity>
+        }
+      </Animated.View>
       <Animated.View
         className="space-y-2 flex-row gap-1 items-center mr-3"
         entering={FadeInUp.delay(200).duration(1000).springify()}
@@ -53,13 +57,19 @@ const Navbar = ({ type }) => {
           Shree Sai Sys
         </Text>
       </Animated.View>
-      <TouchableOpacity
-        onPress={handleLogout}
-        className="p-2"
+
+      <Animated.View
+        entering={FadeInUp.delay(200).duration(1000).springify()}
       >
 
-        <ArrowRightStartOnRectangleIcon color="black" strokeWidth={2} size="27" />
-      </TouchableOpacity>
+        <TouchableOpacity
+          onPress={handleLogout}
+          className="p-2"
+        >
+
+          <ArrowRightStartOnRectangleIcon color="black" strokeWidth={2} size="27" />
+        </TouchableOpacity>
+      </Animated.View>
     </View>
   )
 }

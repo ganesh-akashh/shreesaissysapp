@@ -4,6 +4,7 @@ import Animated, { FadeInUp, FadeInDown, } from 'react-native-reanimated';
 import { signInWithEmailAndPassword } from 'firebase/auth';
 import { auth } from "../firebase"
 import { userInfoQuery } from '../utils/query';
+import { storeUserData } from '../utils/storage';
 
 const LoginScreen = () => {
 
@@ -14,10 +15,10 @@ const LoginScreen = () => {
         password: '',
     });
 
-    
 
 
-   
+
+
     const [loading, setLoading] = useState(false);
 
     const [error, setError] = useState(false);
@@ -37,10 +38,11 @@ const LoginScreen = () => {
             if (response.user) {
                 const data = await userInfoQuery(response.user.uid);
                 if (data.length > 0 && data[0].role === "admin") {
-                    setError(true);  
-                } 
+                    setError(true);
+                } else {
+                    await storeUserData(data[0].id, "userData");
+                }
             }
-           
         } catch (error) {
             console.log(error.message);
             setError(true);

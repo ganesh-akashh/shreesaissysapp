@@ -1,4 +1,4 @@
-import { query, where, collection, getDocs, doc, onSnapshot } from "firebase/firestore";
+import { query, where, collection, getDocs, doc, onSnapshot ,orderBy,limit } from "firebase/firestore";
 import { FIRESTORE_DB } from "../../firebase";
 
 
@@ -39,6 +39,23 @@ export const empInfoQuery = (id, callback) => {
 }
 
 
+
+export const performanceQuery = (callback) => {
+    try {
+        const q = query(userRef, where("role", "==", "employee"), orderBy("points", "desc"), limit(6));
+        const unsubscribe = onSnapshot(q, (querySnapshot) => {
+            const data = querySnapshot.docs?.map((user) => ({
+                ...user.data(),
+                id: user.id
+            }));
+            callback(data);
+        });
+
+        return unsubscribe;
+    } catch (error) {
+        console.log(error);
+    }
+};
 
 
 

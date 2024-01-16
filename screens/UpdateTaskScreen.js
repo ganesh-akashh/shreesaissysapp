@@ -23,7 +23,7 @@ const UpdateTaskScreen = () => {
                 <View className=" bg-white flex-1   space-y-7  py-3 px-3">
                     <Header title="Update Reason" subheading="Add the reason for pending 👇🏻" />
                    
-                    <View className="flex-[0.98]">
+                    <View className="flex-[0.98]  ">
                         <Text
                             style={{ fontFamily: 'poppins-semibold' }}
                             className="px-2 text-lg text-gray-700 py-2"
@@ -34,7 +34,7 @@ const UpdateTaskScreen = () => {
                             style={{ fontFamily: 'poppins-regular' }}
                             placeholder='Enter the reason for pending ...'
                             placeholderTextColor={'gray'}
-                            className=" bg-white h-[50%] rounded-md border-3 mt-1 shadow-sm border-[#f8f8f9] p-4"
+                            className=" bg-white h-[50%] rounded-md border-2 mt-1 shadow-sm border-[#dbdbe5] p-4"
                             multiline
                             numberOfLines={4}
                         />

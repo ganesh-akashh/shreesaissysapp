@@ -16,7 +16,7 @@ const PendingTaskCard = () => {
         >
             <View className="flex flex-col justify-center items-center ">
                 <View className="flex flex-col h-11 justify-center relative bg-emerald-700 w-full     items-end">
-                    <TouchableOpacity className="px-3  rounded-lg  bg-emerald-700 " onPress={() => navigation.push("UpadateTaskScreen")}>
+                    <TouchableOpacity className="px-3  rounded-lg  bg-emerald-700 " onPress={() => navigation.push("UpdateTaskScreen")}>
                         <PencilIcon color="white" size={20} />
                     </TouchableOpacity>
                 </View>
