@@ -3,24 +3,22 @@ import { View, Text, KeyboardAvoidingView, TouchableOpacity, TextInput, Activity
 import Animated, { FadeInUp, FadeInDown, } from 'react-native-reanimated';
 import { signInWithEmailAndPassword } from 'firebase/auth';
 import { auth } from "../firebase"
-import { storeUserData } from '../utils/storage';
-import { collection, getDocs, query, where } from "firebase/firestore";
 import { useNavigation } from '@react-navigation/native';
-import { FIRESTORE_DB } from '../firebase';
+import { userInfoQuery } from '../utils/query';
 
 const LoginScreen = () => {
 
-    const db = FIRESTORE_DB;
+
 
     const [formValues, setFormValues] = useState({
         email: '',
         password: '',
     });
 
-    const userRef = collection(db, "users");
+    
 
 
-    const navigation = useNavigation();
+   
     const [loading, setLoading] = useState(false);
 
     const [error, setError] = useState(false);
@@ -33,30 +31,22 @@ const LoginScreen = () => {
 
 
 
-
     const handleSubmit = async () => {
         setLoading(true);
         try {
             const response = await signInWithEmailAndPassword(auth, formValues.email, formValues.password);
             if (response.user) {
-                const q = query(userRef, where("uid", "==", response.user.uid));
-                const querySnapshot = await getDocs(q);
-                const data = querySnapshot.docs.map((doc) => ({
-                    ...doc.data(),
-                    id: doc.id,
-                }));
-                if (data.length > 0 && data[0].role === "employee") {
-                    await storeUserData(response.user, 'userData');
-                    navigation.navigate("Main");
-                } else {
-                    setError(true);r
-                }
+                const data = await userInfoQuery(response.user.uid);
+                if (data.length > 0 && data[0].role === "admin") {
+                    setError(true);  
+                } 
             }
+           
         } catch (error) {
             console.log(error.message);
             setError(true);
         } finally {
-            setLoading(false)
+            setLoading(false);
         }
     }
 
@@ -70,8 +60,6 @@ const LoginScreen = () => {
                 className="flex-1 bg-white"
                 behavior={Platform.OS === 'ios' ? 'padding' : 'height'}
             >
-
-
                 <View className="flex-1 mb-[12%]  flex-row justify-center items-end">
                     <Animated.Image
                         entering={FadeInUp.delay(200).duration(1000).springify()}
@@ -79,7 +67,6 @@ const LoginScreen = () => {
                         style={{ width: 240, height: 160 }}
                     />
                 </View>
-
                 <View
                     className={`flex-1   px-4 pt-10 space-y-3 border   border-[#dadde0] `}
                     style={{ borderTopLeftRadius: 50, borderTopRightRadius: 50 }}

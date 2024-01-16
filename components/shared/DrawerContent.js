@@ -1,6 +1,6 @@
 
 import React from 'react';
-import { View, Text, TouchableOpacity, SafeAreaView, Image, Dimensions } from 'react-native';
+import { View, Text, TouchableOpacity, SafeAreaView, Image, Dimensions ,ScrollView} from 'react-native';
 import { HomeIcon, ShieldCheckIcon, ExclamationTriangleIcon } from 'react-native-heroicons/outline'
 
 const DrawerContent = ({ navigation }) => {
@@ -21,6 +21,8 @@ const DrawerContent = ({ navigation }) => {
         />
         <View className="h-[0.7] mt-5  bg-emerald-800" />
       </View>
+      <ScrollView>
+
       <View className="self-start p-5 flex gap-2 mx-4">
         <TouchableOpacity className="flex gap-2 items-center flex-row" onPress={() => handleDrawerItemPress('Home')}>
           <HomeIcon color="green" size={20} />
@@ -35,6 +37,7 @@ const DrawerContent = ({ navigation }) => {
           <Text className="text-lg text-emerald-700" style={{ fontFamily: 'poppins-medium' }}>Completed Tasks</Text>
         </TouchableOpacity>
       </View>
+      </ScrollView>
     </SafeAreaView>
   );
 };

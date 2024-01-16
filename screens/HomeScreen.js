@@ -128,11 +128,11 @@ const HomeScreen = () => {
             entering={FadeInUp.delay(1000).duration(1000).springify()}
           >
 
-            <View className="flex flex-col  p-6">
+            <View className="flex flex-col   p-6">
               <Text className="text-xl text-center  text-gray-700 leading-none tracking-tight" style={{ fontFamily: 'poppins-medium' }}>
                 Task Status
               </Text>
-              <View className="mt-8">
+              <View className="mt-8 self-center">
                 <PieChart
                   widthAndHeight={widthAndHeight}
                   series={series}

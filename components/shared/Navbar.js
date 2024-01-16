@@ -4,6 +4,8 @@ import { ArrowRightStartOnRectangleIcon, ArrowUturnLeftIcon, Bars3CenterLeftIcon
 import Animated, { FadeInUp } from 'react-native-reanimated'
 import { useNavigation } from '@react-navigation/native';
 import AsyncStorage from '@react-native-async-storage/async-storage';
+import { signOut } from 'firebase/auth';
+import { auth } from '../../firebase';
 
 const Navbar = ({ type }) => {
   const screenWidth = Dimensions.get('window').width;
@@ -13,8 +15,7 @@ const Navbar = ({ type }) => {
 
   const handleLogout = async () => {
     try {
-      await AsyncStorage.clear();
-      navigation.navigate('Login');
+      await signOut(auth)
     } catch (error) {
       console.log(error);
     }
@@ -23,7 +24,6 @@ const Navbar = ({ type }) => {
   return (
     <View className="flex-row bg-white justify-between items-center px-5" style={{ marginTop: marginValue }}>
       {type === "main" ?
-
         <TouchableOpacity
           onPress={() => navigation.openDrawer()}
         >
