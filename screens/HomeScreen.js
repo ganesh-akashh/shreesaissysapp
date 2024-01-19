@@ -4,8 +4,6 @@ import { StatusBar } from 'expo-status-bar';
 import { SafeAreaView } from 'react-native-safe-area-context';
 import Animated, { FadeInUp } from 'react-native-reanimated';
 import {
-  Bars3CenterLeftIcon,
-  UserIcon,
   Square3Stack3DIcon,
   TrophyIcon,
   ShieldCheckIcon,
@@ -13,7 +11,6 @@ import {
 } from 'react-native-heroicons/outline';
 import PieChart from 'react-native-pie-chart';
 import Navbar from '../components/shared/Navbar';
-import { getUserData } from '../utils/storage';
 import { empInfoQuery, performanceQuery } from '../utils/query';
 
 
@@ -42,7 +39,7 @@ const HomeScreen = () => {
 
     const userInfoUnsubscribe = empInfoQuery(userId, (info) => {
       setPendingTasks(info.tasks.length);
-      setTotalTasks(info.tasks.length + completedTasks);
+      setTotalTasks(info.completedTasks + info.tasks.length);
       setCompletedTasks(info.completedTasks)
       setTotalPoints(info.points);
       setUserName(info.firstName);

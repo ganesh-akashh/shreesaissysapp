@@ -3,7 +3,7 @@ import { View, Text, Pressable, Image, TouchableOpacity } from 'react-native'
 
 const CompletedTaskCard = ({ task }) => {
 
-  const { clientReview, clientName, reason, location, description, reportedDate, billedAmount, attendedDate } = task
+  const { clientReview, clientName, actionTaken, location, description, reportedDate, billedAmount, attendedDate } = task
 
   return (
     <Pressable>
@@ -46,7 +46,7 @@ const CompletedTaskCard = ({ task }) => {
           </View>
           <View className="flex gap-2  flex-row flex-wrap items-center">
             <Text className='font-medium text-sm md:text-base' style={{ fontFamily: 'poppins-semibold' }}>Action taken:</Text>
-            <Text style={{ fontFamily: 'poppins-semibold' }} className='ml-2 text-gray-600'>{reason}</Text>
+            <Text style={{ fontFamily: 'poppins-semibold' }} className='ml-2 text-gray-600'>{actionTaken}</Text>
           </View>
           <View className="flex gap-2  flex-row flex-wrap items-center">
             <Text className='font-medium text-sm md:text-base' style={{ fontFamily: 'poppins-semibold' }}>Billed Amount:</Text>

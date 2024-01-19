@@ -17,7 +17,7 @@ import { store } from './redux/store';
 import { auth } from "./firebase";
 import { onAuthStateChanged } from 'firebase/auth';
 import { userInfoQuery } from './utils/query';
-import SplashScreen from './screens/SplashScreen';
+import SplashScreenn from './screens/SplashScreenn';
 
 
 SplashScreen.preventAutoHideAsync();
@@ -81,7 +81,7 @@ const App = () => {
   }
 
   if (loading) {
-    return <SplashScreen />;
+    return <SplashScreenn />;
   }
 
   return (

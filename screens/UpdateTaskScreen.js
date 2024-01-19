@@ -19,14 +19,17 @@ const UpdateTaskScreen = ({ route, navigation }) => {
     const handleSubmit = async () => {
         try {
             setLoading(true);
-            await updateDoc(doc(FIRESTORE_DB, `tasks/${id}`), {
-                reason: term
-            })
-            setLoading(false);
-            setTerm("");
-            navigation.goBack();
+            if (term) {
+                await updateDoc(doc(FIRESTORE_DB, `tasks/${id}`), {
+                    reason: term
+                })
+                navigation.goBack();
+            }
         } catch (error) {
             console.log("Error on updating the reason for the task");
+        } finally{
+            setTerm("");
+            setLoading(false)
         }
     }
 
@@ -48,15 +51,15 @@ const UpdateTaskScreen = ({ route, navigation }) => {
                             REASON :
                         </Text>
                         <TextInput
-                            style={{ fontFamily: 'poppins-medium'}}
+                            style={{ fontFamily: 'poppins-medium' }}
                             placeholder='Enter the reason for pending ...'
                             placeholderTextColor={'gray'}
                             textAlignVertical='top'
                             multiline
                             numberOfLines={4}
-                            className=" bg-white h-[250px]  rounded-md border-2 mt-1 shadow-sm border-[#dbdbe5] p-4"
+                            className=" bg-white h-[50%]  rounded-md border-2 mt-1 shadow-sm border-[#dbdbe5] p-4"
                             onChangeText={(text) => setTerm(text)}
-                        
+
                         />
                     </View>
                     <TouchableOpacity className="w-full bg-emerald-700 p-3 rounded-md text-center" onPress={handleSubmit}>
