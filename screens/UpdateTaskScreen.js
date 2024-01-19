@@ -38,7 +38,7 @@ const UpdateTaskScreen = ({ route, navigation }) => {
             onPress={() => Keyboard.dismiss()}
             className="bg-white"
         >
-            <SafeAreaView className="bg-white flex-1 space-y-3 " edges={['top']}>
+            <SafeAreaView className="bg-white flex-1 space-y-3 py-8 " edges={['top']}>
                 <StatusBar style='dark' />
                 <Navbar type="nested" />
                 <View className=" bg-white flex-1   space-y-7  py-3 px-3">

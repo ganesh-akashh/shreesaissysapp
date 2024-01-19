@@ -71,7 +71,7 @@ const PendingTaskScreen = () => {
                             <View className="flex flex-col border-l-emerald-800 border-l-4  relative p-2.5 space-y-1">
                                 <MagnifyingGlassIcon style={{ position: "absolute", top: 16, left: 10 }} size={25} color="black" />
                                 <TextInput
-                                    placeholder="Type to search.."
+                                     placeholder="Type to search.."
                                     placeholderTextColor={'gray'}
                                     name="searchTerm"
                                     onChangeText={(text) => setTerm(text)}

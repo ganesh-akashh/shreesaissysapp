@@ -53,11 +53,7 @@ const CompletedTaskCard = ({ task }) => {
             <Text style={{ fontFamily: 'poppins-semibold' }} className='ml-2 text-gray-600'>₹ {billedAmount}</Text>
           </View>
         </View>
-        <View className="p-2">
-          <TouchableOpacity className="w-full bg-emerald-700 p-3 rounded-md text-center" onPress={() => navigation.push("FormScreen")}>
-            <Text style={{ fontFamily: 'poppins-semibold' }} className="text-white text-center">Feedback</Text>
-          </TouchableOpacity>
-        </View>
+      
       </View>
     </Pressable>
   )

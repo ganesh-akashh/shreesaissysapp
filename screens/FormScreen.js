@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react'
-import { View, Text, SafeAreaView, StatusBar, TouchableWithoutFeedback, TextInput, Keyboard, ScrollView, ActivityIndicator, Platform, TouchableOpacity, KeyboardAvoidingView, Pressable, ToastAndroid } from 'react-native'
+import { View, Text, SafeAreaView, StatusBar, TouchableWithoutFeedback, TextInput, Keyboard, ScrollView, ActivityIndicator, Platform, TouchableOpacity, KeyboardAvoidingView, Pressable } from 'react-native'
 import Navbar from '../components/shared/Navbar'
 import { PencilIcon } from 'react-native-heroicons/outline'
 import Header from '../components/shared/Header';
@@ -19,6 +19,9 @@ const FormScreen = ({ route, navigation }) => {
     const [showPicker, setShowPicker] = useState(false)
 
 
+    console.log(date);
+
+
 
 
     const [state, setState] = useState({
@@ -27,7 +30,7 @@ const FormScreen = ({ route, navigation }) => {
         clientReview: "",
     })
 
-    console.log(state);
+
 
     const { actionTaken, billedAmount, clientReview } = state;
 
@@ -43,7 +46,7 @@ const FormScreen = ({ route, navigation }) => {
         if (type === "set") {
             const currentDate = selectedDate;
             setDate(currentDate)
-
+            formatDate(date)
             if (Platform.OS === "android") {
                 toggleDatePicker();
                 setDate(currentDate)
@@ -91,7 +94,7 @@ const FormScreen = ({ route, navigation }) => {
             emp.completedTasks = emp.completedTasks + 1;
             emp.points = emp.points + 10;
             await updateDoc(fetchedtask.assignedTo, emp);
-
+            navigation.goBack();
         } catch (error) {
             console.log("Update pending task", error);
         } finally {
@@ -104,7 +107,7 @@ const FormScreen = ({ route, navigation }) => {
         <TouchableWithoutFeedback
             onPress={() => Keyboard.dismiss()}
         >
-            <SafeAreaView className="bg-white flex-1 space-y-3" edges={['top']}>
+            <SafeAreaView className="bg-white flex-1 space-y-3 py-8" edges={['top']}>
                 <StatusBar style='dark' />
                 <Navbar type="nested" />
                 <View className=" bg-white flex flex-row items-center justify-between  py-3 px-3">
@@ -138,6 +141,46 @@ const FormScreen = ({ route, navigation }) => {
                                         textAlignVertical='top'
                                         multiline
                                         numberOfLines={8}
+                                    />
+                                </View>
+
+
+
+                                <View>
+
+                                    <Text
+                                        style={{ fontFamily: 'poppins-semibold' }}
+                                        className="px-2 text-lg text-gray-700 py-2"
+                                    >
+                                        CLIENT REVIEW :
+                                    </Text>
+                                    <TextInput
+                                        style={{ fontFamily: 'poppins-regular' }}
+                                        placeholder='Enter the client review ...'
+                                        placeholderTextColor={'gray'}
+                                        onChangeText={(text) => setCombinedState({ clientReview: text })}
+                                        className=" bg-white h-[150px] rounded-md border-3 mt-1 shadow-sm border-[#f8f8f9] p-4"
+                                        textAlignVertical='top'
+                                        multiline
+
+                                    />
+                                </View>
+
+
+                                <View>
+                                    <Text
+                                        style={{ fontFamily: 'poppins-semibold' }}
+                                        className="px-2 text-lg text-gray-700 py-2"
+                                    >
+                                        BILLED AMOUNT :
+                                    </Text>
+                                    <TextInput
+                                        style={{ fontFamily: 'poppins-regular' }}
+                                        placeholder='Enter the billed amount ...'
+                                        placeholderTextColor={'gray'}
+                                        onChangeText={(text) => setCombinedState({ billedAmount: text })}
+                                        className=" bg-white rounded-md border-3 mt-1 shadow-sm border-[#f8f8f9] p-4"
+                                        textAlignVertical='top'
                                     />
                                 </View>
 
@@ -186,46 +229,6 @@ const FormScreen = ({ route, navigation }) => {
 
 
 
-                                <View>
-
-                                    <Text
-                                        style={{ fontFamily: 'poppins-semibold' }}
-                                        className="px-2 text-lg text-gray-700 py-2"
-                                    >
-                                        CLIENT REVIEW :
-                                    </Text>
-                                    <TextInput
-                                        style={{ fontFamily: 'poppins-regular' }}
-                                        placeholder='Enter the client review ...'
-                                        placeholderTextColor={'gray'}
-                                        onChangeText={(text) => setCombinedState({ clientReview: text })}
-                                        className=" bg-white h-[150px] rounded-md border-3 mt-1 shadow-sm border-[#f8f8f9] p-4"
-                                        textAlignVertical='top'
-                                        multiline
-
-                                    />
-                                </View>
-
-
-                                <View>
-                                    <Text
-                                        style={{ fontFamily: 'poppins-semibold' }}
-                                        className="px-2 text-lg text-gray-700 py-2"
-                                    >
-                                        BILLED AMOUNT :
-                                    </Text>
-                                    <TextInput
-                                        style={{ fontFamily: 'poppins-regular' }}
-                                        placeholder='Enter the billed amount ...'
-                                        placeholderTextColor={'gray'}
-                                        onChangeText={(text) => setCombinedState({ billedAmount: text })}
-                                        className=" bg-white rounded-md border-3 mt-1 shadow-sm border-[#f8f8f9] p-4"
-                                        textAlignVertical='top'
-                                    />
-                                </View>
-
-
-
 
 
 
@@ -233,7 +236,7 @@ const FormScreen = ({ route, navigation }) => {
                                     <TouchableOpacity className="w-full bg-emerald-700 p-3 rounded-md text-center" onPress={handleSubmit}>
                                         {loading ?
                                             <ActivityIndicator color="white" /> :
-                                            <Text style={{ fontFamily: 'poppins-semibold' }} className="text-white text-center">Complete Task</Text>
+                                            <Text style={{ fontFamily: 'poppins-semibold' }} className="text-white text-center">Submit</Text>
                                         }
                                     </TouchableOpacity>
                                 </View>

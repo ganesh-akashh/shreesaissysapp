@@ -1,6 +1,6 @@
 import { View, Text, Image, TouchableOpacity, Dimensions } from 'react-native'
 import React from 'react'
-import { ArrowRightStartOnRectangleIcon,  Bars3CenterLeftIcon, ChevronLeftIcon } from 'react-native-heroicons/outline'
+import { ArrowRightStartOnRectangleIcon, Bars3CenterLeftIcon, ChevronLeftIcon } from 'react-native-heroicons/outline'
 import Animated, { FadeInUp } from 'react-native-reanimated'
 import { useNavigation } from '@react-navigation/native';
 import AsyncStorage from '@react-native-async-storage/async-storage';

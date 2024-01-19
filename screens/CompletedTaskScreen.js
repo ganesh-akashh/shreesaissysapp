@@ -59,7 +59,7 @@ const CompletedTaskScreen = () => {
 
     return (
         <TouchableWithoutFeedback onPress={() => Keyboard.dismiss()}>
-            <SafeAreaView className="bg-white flex-1 space-y-3" edges={['top']}>
+            <SafeAreaView className="bg-white flex-1 space-y-3 " edges={['top']}>
                 <StatusBar style='dark' />
                 <Navbar type="main" />
                 <View className="flex-1  bg-[#f7f9fc] " >
