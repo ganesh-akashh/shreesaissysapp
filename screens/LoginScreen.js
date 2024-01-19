@@ -4,7 +4,8 @@ import Animated, { FadeInUp, FadeInDown, } from 'react-native-reanimated';
 import { signInWithEmailAndPassword } from 'firebase/auth';
 import { auth } from "../firebase"
 import { userInfoQuery } from '../utils/query';
-import { storeUserData } from '../utils/storage';
+import { loadAuth } from '../redux/reducers/auth';
+import { useDispatch } from 'react-redux';
 
 const LoginScreen = () => {
 
@@ -23,6 +24,8 @@ const LoginScreen = () => {
 
     const [error, setError] = useState(false);
 
+    const dispatch = useDispatch();
+
 
 
     const handleChange = (name, value) => {
@@ -40,7 +43,14 @@ const LoginScreen = () => {
             if (response.user) {
                 const data = await userInfoQuery(response.user.uid);
                 if (data.length > 0 && data[0].role === "employee") {
-                    await storeUserData(data[0].id, "userData");
+                    dispatch(
+                        loadAuth({
+                            token: response.user.refreshToken,
+                            role: data[0].role,
+                            uid: data[0].uid,
+                            docId: data[0].uid,
+                        })
+                    )
                 } else {
                     setError(true);
                 }
@@ -52,7 +62,6 @@ const LoginScreen = () => {
             setLoading(false);
         }
     }
-
 
 
     return (

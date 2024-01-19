@@ -12,12 +12,16 @@ import {
 import PieChart from 'react-native-pie-chart';
 import Navbar from '../components/shared/Navbar';
 import { empInfoQuery, performanceQuery } from '../utils/query';
+import { useSelector } from 'react-redux';
+import { authDetails } from '../redux/reducers/auth';
 
 
 const HomeScreen = () => {
 
 
+  const userInfo=useSelector(authDetails)
 
+  console.log(userInfo);
 
 
   const [userId, setUserId] = useState("ORIId4tzGpnYWxn15Sbh");

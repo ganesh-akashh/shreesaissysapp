@@ -7,6 +7,7 @@ import DateTimePicker from '@react-native-community/datetimepicker';
 import { doc, getDoc, updateDoc } from 'firebase/firestore';
 import { FIRESTORE_DB } from '../firebase';
 
+
 const FormScreen = ({ route, navigation }) => {
 
     const { id } = route.params;
@@ -19,7 +20,7 @@ const FormScreen = ({ route, navigation }) => {
     const [showPicker, setShowPicker] = useState(false)
 
 
-    console.log(date);
+    
 
 
 

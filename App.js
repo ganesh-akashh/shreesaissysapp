@@ -58,7 +58,6 @@ const App = () => {
             if (data.length > 0 && data[0].role === "employee") {
               setUserData(true);
             }
-
           } else {
             setUserData(false)
           }
