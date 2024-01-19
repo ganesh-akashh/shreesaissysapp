@@ -19,12 +19,15 @@ import { authDetails } from '../redux/reducers/auth';
 const HomeScreen = () => {
 
 
-  const userInfo=useSelector(authDetails)
+  const userInfo = useSelector(authDetails)
 
-  console.log(userInfo);
+  const { docId } = userInfo
 
 
-  const [userId, setUserId] = useState("ORIId4tzGpnYWxn15Sbh");
+
+
+
+
   const [loading, setLoading] = useState(false);
   const [totalTasks, setTotalTasks] = useState(0);
   const [performance, setPerformance] = useState([]);
@@ -41,7 +44,7 @@ const HomeScreen = () => {
 
     const unsubscribeFunctions = [];
 
-    const userInfoUnsubscribe = empInfoQuery(userId, (info) => {
+    const userInfoUnsubscribe = empInfoQuery(docId, (info) => {
       setPendingTasks(info.tasks.length);
       setTotalTasks(info.completedTasks + info.tasks.length);
       setCompletedTasks(info.completedTasks)

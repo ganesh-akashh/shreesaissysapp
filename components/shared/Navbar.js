@@ -6,17 +6,21 @@ import { useNavigation } from '@react-navigation/native';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import { signOut } from 'firebase/auth';
 import { auth } from '../../firebase';
+import { useDispatch } from 'react-redux';
+import { removeAuth } from '../../redux/reducers/auth';
 
 const Navbar = ({ type }) => {
   const screenWidth = Dimensions.get('window').width;
   const marginValue = screenWidth * 0.045;
 
   const navigation = useNavigation();
+  const dispatch=useDispatch();
 
   const handleLogout = async () => {
     try {
       await signOut(auth)
       await AsyncStorage.clear();
+      dispatch(removeAuth())
     } catch (error) {
       console.log(error);
     }

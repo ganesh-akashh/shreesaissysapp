@@ -8,13 +8,19 @@ import Empty from '../components/shared/Empty'
 import Navbar from '../components/shared/Navbar'
 import { empCompletedTaskQuery, empInfoQuery } from '../utils/query'
 import CompletedTaskCard from '../components/cards/CompletedTaskCard'
+import { useSelector } from 'react-redux'
+import { authDetails } from '../redux/reducers/auth'
 
 
 
 
 const CompletedTaskScreen = () => {
 
-    const [userId, setUserId] = useState("ORIId4tzGpnYWxn15Sbh");
+    const userInfo =useSelector(authDetails)
+  
+    const {docId}=userInfo
+
+
     const [loading, setLoading] = useState(false);
     const [tasks, setTasks] = useState([]);
     const [term, setTerm] = useState("");
@@ -38,7 +44,7 @@ const CompletedTaskScreen = () => {
             try {
                 setLoading(true);
                 const unsubscribeFunctions = [];
-                 const empCompletedTaskUnsubscribe = empCompletedTaskQuery(userId, (tasks) => {
+                 const empCompletedTaskUnsubscribe = empCompletedTaskQuery(docId, (tasks) => {
                     setTasks(tasks)
                     setLoading(false)
                 })

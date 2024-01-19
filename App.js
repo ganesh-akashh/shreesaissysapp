@@ -13,11 +13,13 @@ import LoginScreen from "./screens/LoginScreen"
 import ClientSignatureScreen from './screens/ClientSignatureScreen';
 import UpdateTaskScreen from './screens/UpdateTaskScreen';
 import DrawerContent from "./components/shared/DrawerContent"
-import { store } from './redux/store';
+import { store, persistor } from './redux/store';
 import { auth } from "./firebase";
 import { onAuthStateChanged } from 'firebase/auth';
 import { userInfoQuery } from './utils/query';
 import SplashScreenn from './screens/SplashScreenn';
+import { PersistGate } from 'redux-persist/integration/react';
+
 
 
 SplashScreen.preventAutoHideAsync();
@@ -85,39 +87,41 @@ const App = () => {
 
   return (
     <Provider store={store}>
-      <NavigationContainer>
-        <Stack.Navigator>
-          {userData ?
-            <Stack.Screen name="Main" options={{ headerShown: false }}>
-              {() => (
-                <Drawer.Navigator
-                  initialRouteName="Home"
-                  drawerContent={(props) => <DrawerContent {...props}
-                    screenOptions={{ swipeEnabled: false }}
-                  />
+      <PersistGate loading={null} persistor={persistor}>
+        <NavigationContainer>
+          <Stack.Navigator>
+            {userData ?
+              <Stack.Screen name="Main" options={{ headerShown: false }}>
+                {() => (
+                  <Drawer.Navigator
+                    initialRouteName="Home"
+                    drawerContent={(props) => <DrawerContent {...props}
+                      screenOptions={{ swipeEnabled: false }}
+                    />
 
-                  }
-                >
-                  <Drawer.Screen name="Home" options={{ headerShown: false }} component={HomeScreen} />
-                  <Drawer.Screen name="Pending" options={{ headerShown: false }}>
-                    {() => (
-                      <Stack.Navigator>
-                        <Stack.Screen name='PendingTasks' options={{ headerShown: false }} component={PendingTaskScreen} />
-                        <Stack.Screen name='UpdateTaskScreen' options={{ headerShown: false }} component={UpdateTaskScreen} />
-                        <Stack.Screen name='FormScreen' options={{ headerShown: false }} component={FormScreen} />
-                        <Stack.Screen name='ClientSignatureScreen' options={{ headerShown: false }} component={ClientSignatureScreen} />
-                      </Stack.Navigator>
-                    )}
-                  </Drawer.Screen>
-                  <Drawer.Screen name="Completed" options={{ headerShown: false }} component={CompletedTaskScreen} />
-                </Drawer.Navigator>
-              )}
-            </Stack.Screen>
-            :
-            <Stack.Screen name="Login" options={{ headerShown: false }} component={LoginScreen} />
-          }
-        </Stack.Navigator>
-      </NavigationContainer>
+                    }
+                  >
+                    <Drawer.Screen name="Home" options={{ headerShown: false }} component={HomeScreen} />
+                    <Drawer.Screen name="Pending" options={{ headerShown: false }}>
+                      {() => (
+                        <Stack.Navigator>
+                          <Stack.Screen name='PendingTasks' options={{ headerShown: false }} component={PendingTaskScreen} />
+                          <Stack.Screen name='UpdateTaskScreen' options={{ headerShown: false }} component={UpdateTaskScreen} />
+                          <Stack.Screen name='FormScreen' options={{ headerShown: false }} component={FormScreen} />
+                          <Stack.Screen name='ClientSignatureScreen' options={{ headerShown: false }} component={ClientSignatureScreen} />
+                        </Stack.Navigator>
+                      )}
+                    </Drawer.Screen>
+                    <Drawer.Screen name="Completed" options={{ headerShown: false }} component={CompletedTaskScreen} />
+                  </Drawer.Navigator>
+                )}
+              </Stack.Screen>
+              :
+              <Stack.Screen name="Login" options={{ headerShown: false }} component={LoginScreen} />
+            }
+          </Stack.Navigator>
+        </NavigationContainer>
+      </PersistGate>
     </Provider>
   );
 };

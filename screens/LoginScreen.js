@@ -48,7 +48,7 @@ const LoginScreen = () => {
                             token: response.user.refreshToken,
                             role: data[0].role,
                             uid: data[0].uid,
-                            docId: data[0].uid,
+                            docId: data[0].id,
                         })
                     )
                 } else {
@@ -72,7 +72,7 @@ const LoginScreen = () => {
                 className="flex-1 bg-white"
                 behavior={Platform.OS === 'ios' ? 'padding' : 'height'}
             >
-                <View className="flex-1 mb-[12%]  flex-row justify-center items-end">
+                <View className="flex-1 mb-[12%]  flex-row justify-center items-end" >
                     <Animated.Image
                         entering={FadeInUp.delay(200).duration(1000).springify()}
                         source={require('../assets/images/logo.jpeg')}
@@ -82,6 +82,7 @@ const LoginScreen = () => {
                 <View
                     className={`flex-1   px-4 pt-10 space-y-3 border   border-[#dadde0] `}
                     style={{ borderTopLeftRadius: 50, borderTopRightRadius: 50 }}
+
                 >
                     <View className="flex items-center mx-5  space-y-4">
                         <Animated.View

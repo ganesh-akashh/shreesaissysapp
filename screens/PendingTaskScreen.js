@@ -8,13 +8,18 @@ import PendingTaskCard from '../components/cards/PendingTaskCard'
 import Empty from '../components/shared/Empty'
 import Navbar from '../components/shared/Navbar'
 import { empInfoQuery } from '../utils/query'
+import { useSelector } from 'react-redux'
+import { authDetails } from '../redux/reducers/auth'
 
 
 
 
 const PendingTaskScreen = () => {
 
-    const [userId, setUserId] = useState("ORIId4tzGpnYWxn15Sbh");
+     const userInfo=useSelector(authDetails)
+
+     const {docId}=userInfo
+
     const [loading, setLoading] = useState(false);
     const [tasks, setTasks] = useState([]);
     const [term, setTerm] = useState("");
@@ -38,7 +43,7 @@ const PendingTaskScreen = () => {
             try {
                 setLoading(true);
                 const unsubscribeFunctions = [];
-                const userInfoUnsubscribe = empInfoQuery(userId, ({ tasks }) => {
+                const userInfoUnsubscribe = empInfoQuery(docId, ({ tasks }) => {
                     setTasks(tasks)
                     setLoading(false)
                 })
