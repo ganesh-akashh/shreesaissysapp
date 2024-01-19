@@ -1,17 +1,19 @@
 import React, { useState } from 'react'
 import { View, Text, SafeAreaView, StatusBar, TouchableWithoutFeedback, TextInput, Keyboard, ScrollView, ActivityIndicator, TouchableOpacity, Pressable } from 'react-native'
-import DateTimePicker from '@react-native-community/datetimepicker';
 import Navbar from '../components/shared/Navbar'
 import { PencilIcon } from 'react-native-heroicons/outline'
-import { useNavigation } from '@react-navigation/native';
 import Header from '../components/shared/Header';
 
-const FormScreen = () => {
+const FormScreen = ({ route, navigation }) => {
+
+    const {id} =route.params;
+
+  
 
     const [selectedDate, setSelectedDate] = useState(new Date());
     const [loading, setLoading] = useState(false);
 
-    const navigation = useNavigation();
+  
 
 
     const onDateChange = (event, selected) => {
@@ -35,7 +37,7 @@ const FormScreen = () => {
                 <StatusBar style='dark' />
                 <Navbar type="nested" />
                 <View className=" bg-white flex flex-row items-center justify-between  py-3 px-3">
-                <Header title="Complete Task" subheading="Add the corresponding task details" />
+                    <Header title="Complete Task" subheading="Add the corresponding task details" />
                     <View>
                         <TouchableOpacity className="p-2 border rounded-lg border-[#f8f8f9] bg-emerald-700 " onPress={() => navigation.push("ClientSignatureScreen")}>
                             <PencilIcon color="white" />
@@ -107,14 +109,7 @@ const FormScreen = () => {
                                     ATTENDED DATE :
                                 </Text>
 
-                                <DateTimePicker
-
-                                    value={selectedDate}
-                                    mode="date"
-                                    is24Hour={true}
-                                    display="default"
-                                    onChange={onDateChange}
-                                />
+                                
                             </View>
 
 

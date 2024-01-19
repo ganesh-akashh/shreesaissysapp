@@ -19,71 +19,70 @@ import { empInfoQuery, performanceQuery } from '../utils/query';
 
 const HomeScreen = () => {
 
-  const [state, setState] = useState({
-    userId: "",
-    loading: false,
-    totalTasks: 0,
-    performance: [],
-    userName: "",
-    completedTasks: 1,
-    pendingTasks: 1,
-    totalPoints: 0,
-  });
-
-  const { userId, loading, totalTasks, performance, userName, completedTasks, pendingTasks, totalPoints } = state;
-
-  const setCombinedState = (newState) => {
-    setState((prevState) => ({ ...prevState, ...newState }));
-  };
 
 
-  const userIdFetchQuery = async () => {
-    setCombinedState({ loading: true });
-    const userIdInfo = await getUserData("userData");
-    setCombinedState({ userId: userIdInfo });
-  }
+
+
+  const [userId, setUserId] = useState("ORIId4tzGpnYWxn15Sbh");
+  const [loading, setLoading] = useState(false);
+  const [totalTasks, setTotalTasks] = useState(0);
+  const [performance, setPerformance] = useState([]);
+  const [completedTasks, setCompletedTasks] = useState(0);
+  const [pendingTasks, setPendingTasks] = useState(0);
+  const [totalPoints, setTotalPoints] = useState(0);
+  const [userName, setUserName] = useState("");
+
 
 
   const fetchQuery = () => {
-     setCombinedState({ loading: true });
-    try {
-      if (userId) {
-        const unsubscribeFunctions = [];
-        const userInfoUnsubscribe = empInfoQuery(userId, ({ firstName, completedTasks, tasks, points }) => {
-          setCombinedState({
-            userName: firstName,
-            completedTasks,
-            pendingTasks: tasks.length,
-            totalTasks: completedTasks + tasks.length,
-            totalPoints: points,
-            loading: false,
-          });
-        });
-        unsubscribeFunctions.push(userInfoUnsubscribe);
+    setLoading(true);
 
-        const performanceUnsubscribe = performanceQuery((performanceResponse) => {
-          setCombinedState({ performance: performanceResponse });
-        });
-        unsubscribeFunctions.push(performanceUnsubscribe);
-        return () => {
-          unsubscribeFunctions.forEach((unsubscribe) => unsubscribe());
-        };
-      }
-    } catch (error) {
-      console.error(error);
-    }
+
+    const unsubscribeFunctions = [];
+
+    const userInfoUnsubscribe = empInfoQuery(userId, (info) => {
+      setPendingTasks(info.tasks.length);
+      setTotalTasks(info.tasks.length + completedTasks);
+      setCompletedTasks(info.completedTasks)
+      setTotalPoints(info.points);
+      setUserName(info.firstName);
+      setLoading(false);
+    });
+
+    unsubscribeFunctions.push(userInfoUnsubscribe);
+
+    const performanceUnsubscribe = performanceQuery((performanceResponse) => {
+      setPerformance(performanceResponse);
+    });
+    unsubscribeFunctions.push(performanceUnsubscribe);
+
+    return () => {
+      unsubscribeFunctions.forEach((unsubscribe) => unsubscribe());
+    };
   };
 
   useEffect(() => {
-    userIdFetchQuery();
-    const cleanup = fetchQuery();
-    return cleanup;
-  }, [userId]);
+
+    fetchQuery();
+
+  }, []);
+
+
 
 
 
   const widthAndHeight = 280
-  const series = [pendingTasks, completedTasks]
+
+  let series
+
+  if (completedTasks == 0 && pendingTasks == 0) {
+    series = [0, 1]
+  } else {
+    series = [pendingTasks, completedTasks]
+  }
+
+
+
   const sliceColor = ['#BF3131', '#15c75a']
 
 
@@ -139,7 +138,7 @@ const HomeScreen = () => {
           <View className="bg-[#F5F7F8] flex-1 py-3 px-3 ">
             <Text
               style={{ fontFamily: 'poppins-bold' }}
-              className="text-2xl  px-2 pt-4 text-gray-700"
+              className="text-2xl  px-4 pt-4 text-gray-700"
             >Welcome Back ,</Text>
             <Text
               style={{ fontFamily: 'poppins-bold' }}

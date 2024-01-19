@@ -1,6 +1,6 @@
 import { View, Text, Image, TouchableOpacity, Dimensions } from 'react-native'
 import React from 'react'
-import { ArrowRightStartOnRectangleIcon, ArrowUturnLeftIcon, Bars3CenterLeftIcon, ChevronLeftIcon, UserIcon } from 'react-native-heroicons/outline'
+import { ArrowRightStartOnRectangleIcon,  Bars3CenterLeftIcon, ChevronLeftIcon } from 'react-native-heroicons/outline'
 import Animated, { FadeInUp } from 'react-native-reanimated'
 import { useNavigation } from '@react-navigation/native';
 import AsyncStorage from '@react-native-async-storage/async-storage';
@@ -9,7 +9,7 @@ import { auth } from '../../firebase';
 
 const Navbar = ({ type }) => {
   const screenWidth = Dimensions.get('window').width;
-  const marginValue = screenWidth * 0.04;
+  const marginValue = screenWidth * 0.045;
 
   const navigation = useNavigation();
 
@@ -24,7 +24,6 @@ const Navbar = ({ type }) => {
 
   return (
     <View className="flex-row   pb-2 bg-white justify-between items-center px-5" style={{ marginTop: marginValue }}>
-
       <Animated.View
         entering={FadeInUp.delay(200).duration(1000).springify()}
       >

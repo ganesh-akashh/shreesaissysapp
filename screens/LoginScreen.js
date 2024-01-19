@@ -32,15 +32,17 @@ const LoginScreen = () => {
 
 
     const handleSubmit = async () => {
+
         setLoading(true);
         try {
             const response = await signInWithEmailAndPassword(auth, formValues.email, formValues.password);
+
             if (response.user) {
                 const data = await userInfoQuery(response.user.uid);
-                if (data.length > 0 && data[0].role === "admin") {
-                    setError(true);
-                } else {
+                if (data.length > 0 && data[0].role === "employee") {
                     await storeUserData(data[0].id, "userData");
+                } else {
+                    setError(true);
                 }
             }
         } catch (error) {

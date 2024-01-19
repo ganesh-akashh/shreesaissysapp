@@ -58,6 +58,7 @@ const App = () => {
             if (data.length > 0 && data[0].role === "employee") {
               setUserData(true);
             }
+            
           } else {
             setUserData(false)
           }
@@ -65,7 +66,7 @@ const App = () => {
         });
         return () => unsubscribe();
       } catch (error) {
-        console.error(error);
+        console.error("App Error",error);
       }
     };
     fetchData();
@@ -92,7 +93,6 @@ const App = () => {
               {() => (
                 <Drawer.Navigator
                   initialRouteName="Home"
-                  screenOptions={{ swipeEnabled: false }}
                   drawerContent={(props) => <DrawerContent {...props} />}
                 >
                   <Drawer.Screen name="Home" options={{ headerShown: false }} component={HomeScreen} />
