@@ -2,7 +2,7 @@ import React from 'react'
 import {   SafeAreaView, } from 'react-native'
 import Animated, { FadeInUp } from 'react-native-reanimated';
 
-const LoadingScreen = () => {
+const SplashScreen = () => {
   return (
     <SafeAreaView className="flex-1 justify-center  items-center">
       <Animated.Image
@@ -14,4 +14,4 @@ const LoadingScreen = () => {
   )
 }
 
-export default LoadingScreen
+export default SplashScreen
