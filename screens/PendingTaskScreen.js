@@ -16,14 +16,14 @@ import { authDetails } from '../redux/reducers/auth'
 
 const PendingTaskScreen = () => {
 
-     const userInfo=useSelector(authDetails)
+    const userInfo = useSelector(authDetails)
 
-     const {docId}=userInfo
+    const { docId } = userInfo
 
     const [loading, setLoading] = useState(false);
     const [tasks, setTasks] = useState([]);
     const [term, setTerm] = useState("");
-   
+
 
     const filteredTasks = tasks?.filter(task => {
         const trimmedClientName = task.clientName.trim().toLowerCase();
@@ -43,20 +43,22 @@ const PendingTaskScreen = () => {
             try {
                 setLoading(true);
                 const unsubscribeFunctions = [];
-                const userInfoUnsubscribe = empInfoQuery(docId, ({ tasks }) => {
-                    setTasks(tasks)
-                    setLoading(false)
-                })
-                unsubscribeFunctions.push(userInfoUnsubscribe);
-                return (() => {
-                    unsubscribeFunctions.forEach((unsubscribe) => unsubscribe())
-                })
+                if(docId){
+                    const userInfoUnsubscribe = empInfoQuery(docId, ({ tasks }) => {
+                        setTasks(tasks)
+                        setLoading(false)
+                    })
+                    unsubscribeFunctions.push(userInfoUnsubscribe);
+                    return (() => {
+                        unsubscribeFunctions.forEach((unsubscribe) => unsubscribe())
+                    })
+                }
             } catch (error) {
                 console.log("Error fetching pending tasks:", error);
             }
         }
         fetchData();
-    }, [])
+    }, [docId])
 
 
 
@@ -76,7 +78,7 @@ const PendingTaskScreen = () => {
                             <View className="flex flex-col border-l-emerald-800 border-l-4  relative p-2.5 space-y-1">
                                 <MagnifyingGlassIcon style={{ position: "absolute", top: 16, left: 10 }} size={25} color="black" />
                                 <TextInput
-                                     placeholder="Type to search.."
+                                    placeholder="Type to search.."
                                     placeholderTextColor={'gray'}
                                     name="searchTerm"
                                     onChangeText={(text) => setTerm(text)}
@@ -93,7 +95,7 @@ const PendingTaskScreen = () => {
                         filteredTasks && filteredTasks.length == 0 ? <Empty /> :
                             <FlatList
                                 data={filteredTasks}
-                                renderItem={({ item }) => <PendingTaskCard task={item} />} 
+                                renderItem={({ item }) => <PendingTaskCard task={item} />}
                                 keyExtractor={(item) => item.id.toString()}
                                 showsVerticalScrollIndicator={false}
                                 showsHorizontalScrollIndicator={false}

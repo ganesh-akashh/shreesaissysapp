@@ -1,4 +1,4 @@
-import { View, TextInput, TouchableWithoutFeedback,  FlatList, Keyboard, ActivityIndicator } from 'react-native'
+import { View, TextInput, TouchableWithoutFeedback, FlatList, Keyboard, ActivityIndicator } from 'react-native'
 import React, { useEffect, useState } from 'react'
 import { StatusBar } from 'expo-status-bar'
 import { SafeAreaView } from 'react-native-safe-area-context'
@@ -16,15 +16,15 @@ import { authDetails } from '../redux/reducers/auth'
 
 const CompletedTaskScreen = () => {
 
-    const userInfo =useSelector(authDetails)
-  
-    const {docId}=userInfo
+    const userInfo = useSelector(authDetails)
+
+    const { docId } = userInfo
 
 
     const [loading, setLoading] = useState(false);
     const [tasks, setTasks] = useState([]);
     const [term, setTerm] = useState("");
-  
+
 
     const filteredTasks = tasks?.filter(task => {
         const trimmedClientName = task.clientName.trim().toLowerCase();
@@ -44,20 +44,22 @@ const CompletedTaskScreen = () => {
             try {
                 setLoading(true);
                 const unsubscribeFunctions = [];
-                 const empCompletedTaskUnsubscribe = empCompletedTaskQuery(docId, (tasks) => {
-                    setTasks(tasks)
-                    setLoading(false)
-                })
-                unsubscribeFunctions.push(empCompletedTaskUnsubscribe);
-                return (() => {
-                    unsubscribeFunctions.forEach((unsubscribe) => unsubscribe())
-                })
+                if (docId) {
+                    const empCompletedTaskUnsubscribe = empCompletedTaskQuery(docId, (tasks) => {
+                        setTasks(tasks)
+                        setLoading(false)
+                    })
+                    unsubscribeFunctions.push(empCompletedTaskUnsubscribe);
+                    return (() => {
+                        unsubscribeFunctions.forEach((unsubscribe) => unsubscribe())
+                    })
+                }
             } catch (error) {
                 console.log("Error fetching pending tasks:", error);
             }
         }
         fetchData();
-    }, [])
+    }, [docId])
 
 
 
@@ -94,7 +96,7 @@ const CompletedTaskScreen = () => {
                         filteredTasks && filteredTasks.length == 0 ? <Empty /> :
                             <FlatList
                                 data={filteredTasks}
-                                renderItem={({ item }) => <CompletedTaskCard task={item} />} 
+                                renderItem={({ item }) => <CompletedTaskCard task={item} />}
                                 keyExtractor={(item) => item.id.toString()}
                                 showsVerticalScrollIndicator={false}
                                 showsHorizontalScrollIndicator={false}

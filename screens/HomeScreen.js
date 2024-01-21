@@ -26,8 +26,6 @@ const HomeScreen = () => {
 
 
 
-
-
   const [loading, setLoading] = useState(false);
   const [totalTasks, setTotalTasks] = useState(0);
   const [performance, setPerformance] = useState([]);
@@ -42,34 +40,39 @@ const HomeScreen = () => {
     setLoading(true);
 
 
+
+
     const unsubscribeFunctions = [];
 
-    const userInfoUnsubscribe = empInfoQuery(docId, (info) => {
-      setPendingTasks(info.tasks.length);
-      setTotalTasks(info.completedTasks + info.tasks.length);
-      setCompletedTasks(info.completedTasks)
-      setTotalPoints(info.points);
-      setUserName(info.firstName);
-      setLoading(false);
-    });
+    if (docId) {
+      const userInfoUnsubscribe = empInfoQuery(docId, (info) => {
+        setPendingTasks(info.tasks.length);
+        setTotalTasks(info.completedTasks + info?.tasks.length);
+        setCompletedTasks(info.completedTasks)
+        setTotalPoints(info.points);
+        setUserName(info.firstName);
+        setLoading(false);
+      });
 
-    unsubscribeFunctions.push(userInfoUnsubscribe);
+      unsubscribeFunctions.push(userInfoUnsubscribe);
 
-    const performanceUnsubscribe = performanceQuery((performanceResponse) => {
-      setPerformance(performanceResponse);
-    });
-    unsubscribeFunctions.push(performanceUnsubscribe);
+      const performanceUnsubscribe = performanceQuery((performanceResponse) => {
+        setPerformance(performanceResponse);
+      });
+      unsubscribeFunctions.push(performanceUnsubscribe);
 
-    return () => {
-      unsubscribeFunctions.forEach((unsubscribe) => unsubscribe());
-    };
+      return () => {
+        unsubscribeFunctions.forEach((unsubscribe) => unsubscribe());
+      };
+    }
+
   };
 
   useEffect(() => {
 
     fetchQuery();
 
-  }, []);
+  }, [docId]);
 
 
 

@@ -4,53 +4,32 @@ import Animated, { FadeInUp, FadeInDown, } from 'react-native-reanimated';
 import { signInWithEmailAndPassword } from 'firebase/auth';
 import { auth } from "../firebase"
 import { userInfoQuery } from '../utils/query';
-import { loadAuth } from '../redux/reducers/auth';
-import { useDispatch } from 'react-redux';
 
 const LoginScreen = () => {
-
-
 
     const [formValues, setFormValues] = useState({
         email: '',
         password: '',
     });
 
-
-
-
-
     const [loading, setLoading] = useState(false);
 
     const [error, setError] = useState(false);
 
-    const dispatch = useDispatch();
-
-
-
     const handleChange = (name, value) => {
         setFormValues({ ...formValues, [name]: value });
     };
-
-
 
     const handleSubmit = async () => {
 
         setLoading(true);
         try {
             const response = await signInWithEmailAndPassword(auth, formValues.email, formValues.password);
-
             if (response.user) {
                 const data = await userInfoQuery(response.user.uid);
+                console.log(data);
                 if (data.length > 0 && data[0].role === "employee") {
-                    dispatch(
-                        loadAuth({
-                            token: response.user.refreshToken,
-                            role: data[0].role,
-                            uid: data[0].uid,
-                            docId: data[0].id,
-                        })
-                    )
+                           
                 } else {
                     setError(true);
                 }
