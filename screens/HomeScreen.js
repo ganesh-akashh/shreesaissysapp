@@ -217,7 +217,7 @@ const HomeScreen = () => {
                   Top performers
                 </Text>
 
-                <View className="flex gap-3 mt-5">
+                <View className="flex gap-3 mt-5 mb-3">
                   {performance.map((item, index) => (
                     <View key={index} className="flex-row flex-wrap border-b p-2 border-[#e1e1ea]  justify-between">
                       <View className="flex-row gap-2 items-center">

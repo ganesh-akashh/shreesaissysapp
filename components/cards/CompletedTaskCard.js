@@ -1,4 +1,4 @@
-import { View, Text, Pressable, Image, TouchableOpacity } from 'react-native'
+import { View, Text, Pressable, Image } from 'react-native'
 
 
 const CompletedTaskCard = ({ task }) => {

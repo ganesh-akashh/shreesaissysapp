@@ -1,4 +1,4 @@
-import { View, TextInput, TouchableWithoutFeedback, ScrollView, FlatList, Pressable, Keyboard, ActivityIndicator } from 'react-native'
+import { View, TextInput, TouchableWithoutFeedback, ScrollView, FlatList, Pressable, Keyboard, ActivityIndicator ,Linking } from 'react-native'
 import React, { useEffect, useState } from 'react'
 import { StatusBar } from 'expo-status-bar'
 import { SafeAreaView } from 'react-native-safe-area-context'

@@ -97,7 +97,7 @@ const CompletedTaskScreen = () => {
                             <FlatList
                                 data={filteredTasks}
                                 renderItem={({ item }) => <CompletedTaskCard task={item} />}
-                                keyExtractor={(item) => item.id.toString()}
+                                 keyExtractor={(item) => item.id.toString()}
                                 showsVerticalScrollIndicator={false}
                                 showsHorizontalScrollIndicator={false}
                             />

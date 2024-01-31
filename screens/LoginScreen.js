@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { View, Text, KeyboardAvoidingView, TouchableOpacity, TextInput, ActivityIndicator, TouchableWithoutFeedback, Keyboard } from 'react-native'
+import { View, Text, KeyboardAvoidingView, TouchableOpacity, TextInput, ActivityIndicator, TouchableWithoutFeedback, Keyboard, StatusBar } from 'react-native'
 import Animated, { FadeInUp, FadeInDown, } from 'react-native-reanimated';
 import { signInWithEmailAndPassword } from 'firebase/auth';
 import { auth } from "../firebase"
@@ -27,7 +27,6 @@ const LoginScreen = () => {
             const response = await signInWithEmailAndPassword(auth, formValues.email, formValues.password);
             if (response.user) {
                 const data = await userInfoQuery(response.user.uid);
-                console.log(data);
                 if (data.length > 0 && data[0].role === "employee") {
                            
                 } else {
@@ -51,6 +50,7 @@ const LoginScreen = () => {
                 className="flex-1 bg-white"
                 behavior={Platform.OS === 'ios' ? 'padding' : 'height'}
             >
+            <StatusBar color="dark" />
                 <View className="flex-1 mb-[12%]  flex-row justify-center items-end" >
                     <Animated.Image
                         entering={FadeInUp.delay(200).duration(1000).springify()}

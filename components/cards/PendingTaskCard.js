@@ -1,4 +1,4 @@
-import { View, Text, Image, TouchableOpacity, Pressable } from 'react-native'
+import { View, Text, Image, TouchableOpacity, Pressable ,Linking} from 'react-native'
 import { useNavigation } from '@react-navigation/native'
 import { PencilIcon } from 'react-native-heroicons/outline'
 
@@ -9,7 +9,13 @@ const PendingTaskCard = ({ task }) => {
     const { clientName, location, description, reportedDate, dueDate, id } = task
     const navigation = useNavigation();
 
+    const openMapUrl = () => {
 
+        if (task.location) {
+        
+            Linking.openURL(task.location);
+        }
+    };
 
     return (
         <Pressable>
@@ -44,7 +50,7 @@ const PendingTaskCard = ({ task }) => {
                     </View>
                     <View className="flex gap-2  flex-row flex-wrap items-center">
                         <Text className='font-medium text-sm md:text-base' style={{ fontFamily: 'poppins-semibold' }}>Location:</Text>
-                        <Text style={{ fontFamily: 'poppins-semibold' }} className='ml-2 text-gray-600'>{location}</Text>
+                        <Pressable onPress={openMapUrl}><Text style={{ fontFamily: 'poppins-semibold' }} className='ml-2 text-gray-600 '>{location}</Text></Pressable>
                     </View>
                     <View className="flex gap-2  flex-row flex-wrap items-center">
                         <Text className='font-medium text-sm md:text-base' style={{ fontFamily: 'poppins-semibold' }}>Problem Description:</Text>
