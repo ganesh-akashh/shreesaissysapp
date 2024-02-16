@@ -1,6 +1,19 @@
 {
   "expo": {
-    "name": "native",
-    "slug": "native"
+    "name": "Shree Sai Sys",
+    "icon": "./assets/images/sun.png",
+    "slug": "native",
+    "extra": {
+      "eas": {
+        "projectId": "914ed332-f97b-40d7-83e6-93a0258cb99a"
+      }
+    },
+    "android": {
+      "adaptiveIcon": {
+        "foregroundImage": "./assets/images/sun.png",
+        "backgroundColor": "#FFFFFF"
+      },
+      "package": "com.example.app"
+    }
   }
 }

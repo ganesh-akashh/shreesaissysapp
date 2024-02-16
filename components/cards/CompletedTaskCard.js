@@ -16,7 +16,7 @@ const CompletedTaskCard = ({ task }) => {
           </View>
           <View className=" mr-2   p-1.5 border-white bg-white  rounded-full -mt-10">
             <Image
-              source={require('../../assets/images/user.jpg')}
+              source={require('../../assets/images/user.png')}
               style={{ width: 65, height: 65 }}
               className="rounded-full"
             />

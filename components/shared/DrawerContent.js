@@ -16,8 +16,8 @@ const DrawerContent = ({ navigation }) => {
     <SafeAreaView className="p-2 flex-1 bg-white items-center" style={{ marginTop: marginValue }}>
       <View className="" >
         <Image
-          source={require('../../assets/images/logo.jpeg')}
-          style = {{ width: 180, height: 140 }}
+          source={require('../../assets/images/logo.png')}
+          style = {{ width: 150, height: 120 }}
         />
         <View className="h-[0.7] mt-5  bg-emerald-800" />
       </View>

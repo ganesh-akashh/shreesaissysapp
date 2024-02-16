@@ -7,7 +7,7 @@ const SplashScreenn = () => {
     <SafeAreaView className="flex-1 justify-center  items-center">
       <Animated.Image
          entering={FadeInUp.delay(200).duration(1000).springify()}
-        source={require('../assets/images/logo.jpeg')}
+        source={require('../assets/images/logo.png')}
         style={{ width: 240, height: 160 }}
       />
     </SafeAreaView>

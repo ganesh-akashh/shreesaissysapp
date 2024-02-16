@@ -13,9 +13,9 @@ const ClientSignatureScreen = ({ route, navigation }) => {
 
 
     const { id } = route.params
-   
 
-    
+
+
 
     const handleSignature = async (signature) => {
         try {
@@ -28,7 +28,7 @@ const ClientSignatureScreen = ({ route, navigation }) => {
 
         } catch (error) {
             console.log("Signature error", error);
-        } 
+        }
     };
 
     return (
@@ -36,13 +36,17 @@ const ClientSignatureScreen = ({ route, navigation }) => {
         <SafeAreaView className="bg-white flex-1 space-y-3 py-8" edges={['top']}>
             <StatusBar style='dark' />
             <Navbar type="nested" />
-            <View className=" bg-white flex-1   space-y-7  py-3 px-3">
+            <View className=" bg-white flex-1   space-y-7   px-3">
                 <Header title="Client's Signature" subheading=" Put the signature here 👇🏻" />
-                <View className="  h-[600px]">
+                <View style={{ height: "100%" }} >
                     <SignatureScreen
-                        ref={ref}
                         onOK={handleSignature}
                         autoClear={true}
+                        webStyle={`.m-signature-pad--footer
+                        .button {
+                        background-color: #047857;
+                          color: #FFF;
+                        }`}
                     />
                 </View>
             </View>

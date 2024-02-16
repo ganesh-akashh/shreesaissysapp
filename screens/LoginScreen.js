@@ -54,7 +54,7 @@ const LoginScreen = () => {
                 <View className="flex-1 mb-[12%]  flex-row justify-center items-end" >
                     <Animated.Image
                         entering={FadeInUp.delay(200).duration(1000).springify()}
-                        source={require('../assets/images/logo.jpeg')}
+                        source={require('../assets/images/logo.png')}
                         style={{ width: 240, height: 160 }}
                     />
                 </View>

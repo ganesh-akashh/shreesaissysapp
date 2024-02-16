@@ -14,7 +14,7 @@ const Navbar = ({ type }) => {
   const marginValue = screenWidth * 0.045;
 
   const navigation = useNavigation();
-  const dispatch=useDispatch();
+  const dispatch = useDispatch();
 
   const handleLogout = async () => {
     try {
@@ -27,52 +27,61 @@ const Navbar = ({ type }) => {
   }
 
   return (
-    <View className="flex-row   pb-2 bg-white justify-between items-center px-5" style={{ marginTop: marginValue }}>
-      <Animated.View
-        entering={FadeInUp.delay(200).duration(1000).springify()}
-      >
-        {type === "main" ?
-          <TouchableOpacity
-            onPress={() => navigation.openDrawer()}
+    <View className={``} style={{ marginTop: marginValue }}>
+      <View className="flex-row justify-between items-center px-5">
+        <Animated.View
+          entering={FadeInUp.delay(200).duration(1000).springify()}
+        >
+          {type === "main" ?
+            <TouchableOpacity
+              onPress={() => navigation.openDrawer()}
+            >
+              <Bars3CenterLeftIcon color="black" strokeWidth={2} size="28" />
+            </TouchableOpacity> :
+            <TouchableOpacity
+              onPress={() => navigation.goBack()}
+            >
+
+              <ChevronLeftIcon color="black" strokeWidth={2} size="24" />
+            </TouchableOpacity>
+          }
+        </Animated.View>
+        <Animated.View
+          className="space-y-2 flex-row gap-1 items-center mr-3"
+          entering={FadeInUp.delay(200).duration(1000).springify()}
+        >
+          <Image
+            source={require('../../assets/images/sun.png')}
+            style={{ width: 40, height: 40 }}
+          />
+          <Text
+            style={{ fontFamily: 'lobster-regular' }}
+            className="text-2xl   text-emerald-700"
           >
-            <Bars3CenterLeftIcon color="black" strokeWidth={2} size="28" />
-          </TouchableOpacity> :
+            Shree Sai Sys
+          </Text>
+        </Animated.View>
+
+        <Animated.View
+          entering={FadeInUp.delay(200).duration(1000).springify()}
+        >
+
           <TouchableOpacity
-            onPress={() => navigation.goBack()}
+            onPress={handleLogout}
+            className="p-2"
           >
 
-            <ChevronLeftIcon color="black" strokeWidth={2} size="24" />
+            <ArrowRightStartOnRectangleIcon color="black" strokeWidth={2} size="27" />
           </TouchableOpacity>
-        }
-      </Animated.View>
-      <Animated.View
-        className="space-y-2 flex-row gap-1 items-center mr-3"
-        entering={FadeInUp.delay(200).duration(1000).springify()}
-      >
-        <Image
-          source={require('../../assets/images/sun.jpg')}
-          style={{ width: 40, height: 40 }}
-        />
-        <Text
-          style={{ fontFamily: 'lobster-regular' }}
-          className="text-2xl   text-emerald-700"
-        >
-          Shree Sai Sys
-        </Text>
-      </Animated.View>
+        </Animated.View>
+      </View>
+      {
+        type =="nested" && 
+        <View className="w-full px-4 mt-3">
+        <View className="border border-[#eeeef1]" />
+        </View>
+      }
 
-      <Animated.View
-        entering={FadeInUp.delay(200).duration(1000).springify()}
-      >
-
-        <TouchableOpacity
-          onPress={handleLogout}
-          className="p-2"
-        >
-
-          <ArrowRightStartOnRectangleIcon color="black" strokeWidth={2} size="27" />
-        </TouchableOpacity>
-      </Animated.View>
     </View>
   )
 }
